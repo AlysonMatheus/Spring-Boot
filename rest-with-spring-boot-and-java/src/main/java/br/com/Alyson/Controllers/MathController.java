@@ -17,7 +17,54 @@ public class MathController {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Please set a numeric value!");
 
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
+
+
     }
+    @RequestMapping("/div/{numberOne}/{numberTwo}")
+    public Double div(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo)
+            throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Please set a numeric value!");
+
+        return convertToDouble(numberOne) / convertToDouble(numberTwo);
+
+
+    }
+    @RequestMapping("/mult/{numberOne}/{numberTwo}")
+    public Double mult(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo)
+            throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Please set a numeric value!");
+
+        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+
+
+    }
+    @RequestMapping("/sub/{numberOne}/{numberTwo}")
+    public Double sub(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo)
+            throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Please set a numeric value!");
+
+        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+
+
+    }
+    @RequestMapping("/raiz/{numberOne}")
+    public Double raiz(
+            @PathVariable("numberOne") String numberOne
+         )
+            throws Exception {
+        if (!isNumeric(numberOne)) throw new UnsupportedOperationException("Please set a numeric value!");
+        double sqrt = Math.sqrt(Double.parseDouble(numberOne));
+        return sqrt;
+
+
+    }
+
 
     private Double convertToDouble(String strNumber) throws IllegalArgumentException {
         if (strNumber == null || strNumber.isEmpty())throw new UnsupportedOperationException("Please set a numeric value!");
