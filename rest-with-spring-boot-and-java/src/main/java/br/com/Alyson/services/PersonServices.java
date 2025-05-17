@@ -1,4 +1,4 @@
-package br.com.Alyson;
+package br.com.Alyson.services;
 
 import br.com.Alyson.model.Person;
 import org.springframework.stereotype.Service;

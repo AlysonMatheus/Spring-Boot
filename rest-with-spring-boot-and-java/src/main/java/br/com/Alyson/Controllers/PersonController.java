@@ -1,6 +1,6 @@
 package br.com.Alyson.Controllers;
 
-import br.com.Alyson.PersonServices;
+import br.com.Alyson.services.PersonServices;
 import br.com.Alyson.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
