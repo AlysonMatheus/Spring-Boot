@@ -1,6 +1,6 @@
 package br.com.Alyson.unitetests.mapper.mocks;
 
-import br.com.Alyson.data.dto.PersonDTO;
+import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.model.Person;
 
 import java.util.ArrayList;

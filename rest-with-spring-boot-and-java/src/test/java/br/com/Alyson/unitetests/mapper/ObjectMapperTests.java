@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 
-import br.com.Alyson.data.dto.PersonDTO;
+import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.model.Person;
 import br.com.Alyson.unitetests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;

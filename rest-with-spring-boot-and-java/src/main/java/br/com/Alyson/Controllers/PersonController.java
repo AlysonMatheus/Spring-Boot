@@ -1,6 +1,7 @@
 package br.com.Alyson.Controllers;
 
-import br.com.Alyson.data.dto.PersonDTO;
+import br.com.Alyson.data.dto.v1.PersonDTO;
+import br.com.Alyson.data.dto.v2.PersonDTOV2;
 import br.com.Alyson.services.PersonServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,13 @@ public class PersonController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonDTO create(@RequestBody PersonDTO person) {
         return service.create(person);
+
+    }
+    @PostMapping( name = "/V2",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public PersonDTOV2 create(@RequestBody PersonDTOV2  person) {
+        return service.createV2(person);
 
     }
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
