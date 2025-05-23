@@ -8,6 +8,7 @@ import static br.com.Alyson.mapper.ObjectMapper.parseListObject;
 import static br.com.Alyson.mapper.ObjectMapper.parseObject;
 
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
+import br.com.Alyson.mapper.custom.PersonMapper;
 import br.com.Alyson.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,8 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+    @Autowired
+    PersonMapper converter;
 
 
     public List<PersonDTO> findAll() {
@@ -47,10 +50,11 @@ public class PersonServices {
         var entity = parseObject(person, Person.class);
         return parseObject(repository.save(entity), PersonDTO.class);
     }
+
     public PersonDTOV2 createV2 (PersonDTOV2 person) {
         logger.info("Finding all People!");
-        var entity = parseObject(person, Person.class);
-        return parseObject(repository.save(entity), PersonDTO.class);
+        var entity =converter.convertDTOtoEntity(person);
+        return converter.convertEntityToDTO(repository.save(entity));
     }
 
     public PersonDTO update(PersonDTO person) {
