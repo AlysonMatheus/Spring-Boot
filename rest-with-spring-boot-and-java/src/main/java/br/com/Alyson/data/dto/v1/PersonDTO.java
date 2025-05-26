@@ -2,19 +2,27 @@ package br.com.Alyson.data.dto.v1;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 
-
+@JsonPropertyOrder({"id","first_Name","last_Name","address", "gender"})
 public class PersonDTO implements Serializable {
     private static final long serialVersionUID = 1l;
 
 
     private Long id;
+    @JsonProperty("first_Name")
     private String firstName;
+    @JsonProperty("last_Name")
     private String lastName;
     private String address;
+
+    @JsonIgnore
     private String gender;
 
     public PersonDTO() {
