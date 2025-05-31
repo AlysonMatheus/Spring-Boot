@@ -1,5 +1,6 @@
 package br.com.Alyson.services;
 
+import br.com.Alyson.Controllers.PersonController;
 import br.com.Alyson.Exception.ResourceNotFoundException;
 import br.com.Alyson.Repository.PersonRepository;
 import br.com.Alyson.data.dto.v1.PersonDTO;
@@ -13,6 +14,9 @@ import br.com.Alyson.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.stereotype.Service;
 
 
@@ -41,7 +45,10 @@ public class PersonServices {
         logger.info("Finding one Person!");
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
-        return parseObject(entity, PersonDTO.class);
+      var dto =  parseObject(entity, PersonDTO.class);
+      dto.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel().withType("GET"));
+
+      return dto;
 
     }
 
