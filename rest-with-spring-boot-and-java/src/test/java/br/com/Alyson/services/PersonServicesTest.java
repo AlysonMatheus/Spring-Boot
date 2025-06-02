@@ -1,5 +1,6 @@
 package br.com.Alyson.services;
 
+import br.com.Alyson.Exception.RequiredObjectIsNullException;
 import br.com.Alyson.Repository.PersonRepository;
 import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.model.Person;
@@ -135,6 +136,16 @@ class PersonServicesTest {
     }
 
     @Test
+    void testCreateWithNullPerson(){
+        Exception exception = assertThrows(RequiredObjectIsNullException.class,
+        ()->{
+                     service.create(null);
+        });
+               String expectMessage = "It is not allowed to persist a null object!";
+               String actualMessage = exception.getMessage();
+               assertTrue(actualMessage.contains(expectMessage));
+    }
+    @Test
     void update() {
         Person person = input.mockEntity(1);
         Person persisted = person;
@@ -183,6 +194,16 @@ class PersonServicesTest {
         assertEquals("Last Name Test1",result.getLastName());
         assertEquals("Female",result.getGender());
     }
+    @Test
+    void testUpdateWithNullPerson(){
+        Exception exception = assertThrows(RequiredObjectIsNullException.class,
+                ()->{
+                    service.update(null);
+                });
+        String expectMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectMessage));
+    }
 
 
     @Test
@@ -194,7 +215,7 @@ class PersonServicesTest {
        service.delete(1L);
        verify(repository, times(1)).findById(anyLong());
        verify(repository, times(1)).delete(any(Person.class));
-       verifyNoInteractions(repository);
+       verifyNoMoreInteractions(repository);
     }
     @Test
     void findAll() {
