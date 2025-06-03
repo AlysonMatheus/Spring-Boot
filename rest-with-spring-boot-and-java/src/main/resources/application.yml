@@ -17,7 +17,14 @@ spring:
     open-in-view: false
   logging:
     level:
-      root: WARN
+       root: INFO
+     # root: WARN
       # br.com.Alyson: DEBUG
+
+  spring-doc:
+     paths-to-match: /api/**/v1/**
+     swagger-ui:
+       use-root-path: true
+
 server:
   port: 8081
