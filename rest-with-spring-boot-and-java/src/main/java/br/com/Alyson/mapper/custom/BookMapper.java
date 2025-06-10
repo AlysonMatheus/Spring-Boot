@@ -1,0 +1,18 @@
+package br.com.Alyson.mapper.custom;
+
+import br.com.Alyson.data.dto.books.BookDTO;
+import br.com.Alyson.model.Book;
+
+public class BookMapper {
+    public BookDTO convertEntityToDTO(Book book){
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setId(book.getId());
+        bookDTO.setAuthor(book.getAuthor());
+        bookDTO.setTitle(book.getTitle());
+        bookDTO.setLanchu_date(book.getLanchu_date());
+        bookDTO.setPrice(book.getPrice());
+        return bookDTO;
+
+    }
+
+}
