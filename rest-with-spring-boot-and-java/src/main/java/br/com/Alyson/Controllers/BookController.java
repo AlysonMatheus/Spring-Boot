@@ -1,8 +1,9 @@
 package br.com.Alyson.Controllers;
 
+import br.com.Alyson.Controllers.docs.BookControllersDocs;
 import br.com.Alyson.data.dto.books.BookDTO;
-import br.com.Alyson.data.dto.v1.PersonDTO;
-import br.com.Alyson.data.dto.v2.PersonDTOV2;
+
+
 import br.com.Alyson.services.BookServices;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,16 @@ import java.util.List;
 @RestController
 @RequestMapping("api/book")
 @Tag(name = "Book", description = "Endpoints for Managing Book")
-public class BookController {
+public class BookController implements BookControllersDocs {
+
 @Autowired
  private BookServices services;
+
     @Override
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
             MediaType.APPLICATION_YAML_VALUE})
-    public List<PersonDTO> findAll() {
+    public List<BookDTO> findAll() {
         return services.findAll();
 
     }

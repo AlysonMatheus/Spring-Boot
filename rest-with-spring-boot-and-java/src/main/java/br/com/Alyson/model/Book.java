@@ -13,7 +13,7 @@ public class Book implements Serializable {
     private static final long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "author", nullable = false, length = 80)
     private String author;
     @Column(nullable = false, length = 8)
@@ -23,11 +23,12 @@ public class Book implements Serializable {
     @Column(nullable = false, length = 100)
     private String title;
 
-    public int getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,7 +69,7 @@ public class Book implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return getId() == book.getId() && Float.compare(getPrice(), book.getPrice()) == 0 && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getLanchu_date(), book.getLanchu_date()) && Objects.equals(getTitle(), book.getTitle());
+        return Float.compare(getPrice(), book.getPrice()) == 0 && Objects.equals(getId(), book.getId()) && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getLanchu_date(), book.getLanchu_date()) && Objects.equals(getTitle(), book.getTitle());
     }
 
     @Override
