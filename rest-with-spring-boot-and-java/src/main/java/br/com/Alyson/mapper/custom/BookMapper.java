@@ -11,7 +11,7 @@ public class BookMapper {
         bookDTO.setId(book.getId());
         bookDTO.setAuthor(book.getAuthor());
         bookDTO.setTitle(book.getTitle());
-        bookDTO.setLanchu_date(book.getLanchu_date());
+      
         bookDTO.setPrice(book.getPrice());
         return bookDTO;
 

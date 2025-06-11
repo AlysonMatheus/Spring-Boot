@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 import static br.com.Alyson.mapper.ObjectMapper.parseListObject;
@@ -71,7 +72,7 @@ public class BookServices {
 
         entity.setId(book.getId());
         entity.setAuthor(book.getAuthor());
-        entity.setLanchu_date(book.getLanchu_date());
+        entity.setLaunch_date(Date.valueOf(book.getLaunch_date()));
         entity.setTitle(book.getTitle());
         entity.setPrice(book.getPrice());
 
