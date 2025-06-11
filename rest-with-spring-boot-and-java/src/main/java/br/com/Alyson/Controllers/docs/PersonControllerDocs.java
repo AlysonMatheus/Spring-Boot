@@ -1,5 +1,6 @@
 package br.com.Alyson.Controllers.docs;
 
+import br.com.Alyson.data.dto.books.BookDTO;
 import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
 import io.swagger.v3.oas.annotations.Operation;

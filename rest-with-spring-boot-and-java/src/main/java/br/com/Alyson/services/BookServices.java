@@ -9,7 +9,7 @@ import br.com.Alyson.data.dto.books.BookDTO;
 
 import br.com.Alyson.mapper.custom.BookMapper;
 import br.com.Alyson.model.Book;
-import br.com.Alyson.model.Person;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,4 +104,4 @@ public class BookServices {
 
 
 }
-}
+

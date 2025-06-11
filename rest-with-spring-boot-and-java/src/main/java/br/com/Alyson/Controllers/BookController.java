@@ -4,6 +4,7 @@ import br.com.Alyson.Controllers.docs.BookControllersDocs;
 import br.com.Alyson.data.dto.books.BookDTO;
 
 
+import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.services.BookServices;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ public class BookController implements BookControllersDocs {
         return services.create(person);
 
     }
+
 
 
 

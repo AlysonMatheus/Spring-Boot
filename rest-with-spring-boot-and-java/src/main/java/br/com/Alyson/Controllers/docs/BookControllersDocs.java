@@ -1,7 +1,8 @@
 package br.com.Alyson.Controllers.docs;
 
-import br.com.Alyson.data.dto.v1.PersonDTO;
-import br.com.Alyson.data.dto.v2.PersonDTOV2;
+import br.com.Alyson.data.dto.books.BookDTO;
+
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,7 +24,7 @@ public interface BookControllersDocs {
                             responseCode = "200",
                             content =
                                     {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                            array = @ArraySchema(schema = @Schema(implementation = PersonDTO.class)))
+                                            array = @ArraySchema(schema = @Schema(implementation = BookDTO.class)))
                                     }),
 
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
@@ -34,7 +35,7 @@ public interface BookControllersDocs {
             }
 
     )
-    List<PersonDTO> findAll();
+    List<BookDTO> findAll();
 
 
     @Operation(summary = "Finds a Person",
@@ -43,7 +44,7 @@ public interface BookControllersDocs {
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
-                            content = @Content(schema = @Schema(implementation = PersonDTO.class))
+                            content = @Content(schema = @Schema(implementation = BookDTO.class))
                     ),
 
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
@@ -54,7 +55,7 @@ public interface BookControllersDocs {
             }
 
     )
-    PersonDTO findById(@PathVariable("id") Long id);
+    BookDTO findById(@PathVariable("id") Long id);
 
 
     @Operation(summary = "Create Person",
@@ -63,7 +64,7 @@ public interface BookControllersDocs {
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
-                            content = @Content(schema = @Schema(implementation = PersonDTO.class))
+                            content = @Content(schema = @Schema(implementation = BookDTO.class))
                     ),
 
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
@@ -74,10 +75,10 @@ public interface BookControllersDocs {
             }
 
     )
-    PersonDTO create(@RequestBody PersonDTO person);
+    BookDTO create(@RequestBody BookDTO bookDTO);
 
 
-    PersonDTOV2 create(@RequestBody PersonDTOV2 person);
+
 
 
     @Operation(summary = "Finds a Person Update",
@@ -86,7 +87,7 @@ public interface BookControllersDocs {
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
-                            content = @Content(schema = @Schema(implementation = PersonDTO.class))
+                            content = @Content(schema = @Schema(implementation = BookDTO.class))
                     ),
 
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
@@ -97,7 +98,7 @@ public interface BookControllersDocs {
             }
 
     )
-    PersonDTO update(@RequestBody PersonDTO person);
+    BookDTO update(@RequestBody BookDTO person);
 
 
     @Operation(summary = "Delete a Person",
@@ -106,7 +107,7 @@ public interface BookControllersDocs {
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
-                            content = @Content(schema = @Schema(implementation = PersonDTO.class))
+                            content = @Content(schema = @Schema(implementation = BookDTO.class))
                     ),
 
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
