@@ -32,7 +32,7 @@ public class BookServices {
     BookMapper converter;
 
     public List<BookDTO> findAll() {
-        logger.info("Finding all People!");
+        logger.info("Finding all Books!");
         var persons = parseListObject(repository.findAll(), BookDTO.class);
         persons.forEach(this::addHateoasLinks);
 
@@ -40,7 +40,7 @@ public class BookServices {
     }
 
     public BookDTO findById(Long id) {
-        logger.info("Finding one Person!");
+        logger.info("Finding one Books!");
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
         var dto = parseObject(entity, BookDTO.class);
@@ -54,7 +54,7 @@ public class BookServices {
     public BookDTO create(BookDTO person) {
         if (person == null) throw new RequiredObjectIsNullException();
 
-        logger.info("Finding all People!");
+        logger.info("Finding all Books!");
         var entity = parseObject(person, Book.class);
         var dto = parseObject(repository.save(entity), BookDTO.class);
         addHateoasLinks(dto);
@@ -66,7 +66,7 @@ public class BookServices {
     public BookDTO update(BookDTO book) {
         if (book == null) throw new RequiredObjectIsNullException();
 
-        logger.info("Update all People!");
+        logger.info("Update all Books!");
         Book entity = repository.findById(book.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
@@ -84,7 +84,7 @@ public class BookServices {
     }
 
     public void delete(Long id) {
-        logger.info("Delete all People!");
+        logger.info("Delete all Books!");
 
         Book entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));

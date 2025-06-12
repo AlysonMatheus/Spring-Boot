@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 public interface BookControllersDocs {
-    @Operation(summary = "Find All People",
-            description = "Find All People",
-            tags = {"People"},
+    @Operation(summary = "Find All Books",
+            description = "Find All Books",
+            tags = {"Book"},
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
@@ -38,9 +38,9 @@ public interface BookControllersDocs {
     List<BookDTO> findAll();
 
 
-    @Operation(summary = "Finds a Person",
+    @Operation(summary = "Finds a Books",
             description = "Find a specific person by your ID",
-            tags = {"People"},
+            tags = {"Book"},
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
@@ -58,9 +58,9 @@ public interface BookControllersDocs {
     BookDTO findById(@PathVariable("id") Long id);
 
 
-    @Operation(summary = "Create Person",
+    @Operation(summary = "Create Books",
             description = "Find a specific create",
-            tags = {"People"},
+            tags = {"Book"},
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
@@ -81,9 +81,9 @@ public interface BookControllersDocs {
 
 
 
-    @Operation(summary = "Finds a Person Update",
-            description = "Find a specific information people",
-            tags = {"People"},
+    @Operation(summary = "Finds a Books Update",
+            description = "Find a specific information Books",
+            tags = {"Book"},
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
@@ -101,9 +101,9 @@ public interface BookControllersDocs {
     BookDTO update(@RequestBody BookDTO person);
 
 
-    @Operation(summary = "Delete a Person",
+    @Operation(summary = "Delete a Books",
             description = "Find a specific person by your ID",
-            tags = {"People"},
+            tags = {"Book"},
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
