@@ -72,7 +72,7 @@ public class BookServices {
 
         entity.setId(book.getId());
         entity.setAuthor(book.getAuthor());
-        entity.setLaunch_date(Date.valueOf(book.getLaunch_date()));
+        entity.setLaunch_date((book.getLaunch_date()));
         entity.setTitle(book.getTitle());
         entity.setPrice(book.getPrice());
 

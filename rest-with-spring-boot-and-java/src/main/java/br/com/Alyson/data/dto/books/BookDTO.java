@@ -19,7 +19,7 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String author;
 
-    private LocalDate launch_date;
+    private Date launch_date;
 
     private float price;
 
@@ -45,11 +45,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
         this.author = author;
     }
 
-    public LocalDate getLaunch_date() {
+    public Date getLaunch_date() {
         return launch_date;
     }
 
-    public void setLaunch_date(LocalDate launch_date) {
+    public void setLaunch_date(Date launch_date) {
         this.launch_date = launch_date;
     }
 
