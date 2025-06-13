@@ -3,7 +3,7 @@ package br.com.Alyson.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +16,7 @@ public class Book implements Serializable {
     private Long id;
     @Column(name = "author", nullable = false, length = 80)
     private String author;
-    @Column(nullable = false, length = 8)
+    @Column(name = "launch_date", nullable = false)
     private Date launch_date;
     @Column(nullable = false, length = 10)
     private float price;

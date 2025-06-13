@@ -51,11 +51,11 @@ public class BookServices {
     }
 
 
-    public BookDTO create(BookDTO person) {
-        if (person == null) throw new RequiredObjectIsNullException();
+    public BookDTO create(BookDTO book) {
+        if (book == null) throw new RequiredObjectIsNullException();
 
         logger.info("Finding all Books!");
-        var entity = parseObject(person, Book.class);
+        var entity = parseObject(book, Book.class);
         var dto = parseObject(repository.save(entity), BookDTO.class);
         addHateoasLinks(dto);
         return dto;

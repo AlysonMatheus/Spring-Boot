@@ -71,16 +71,18 @@ class BookServicesTest {
         );
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("update")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("PUT"))
         );
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("delete")
-                        && link.getHref().endsWith("api/book/v1/1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("DELETE"))
         );
-        assertEquals("Address Test1", result.getTitle());
-        assertEquals("First Name Test1", result.getAuthor());
+        assertEquals("Some Author1", result.getAuthor());
+        assertEquals(25F,result.getPrice());
+        assertEquals("Some Title1",result.getTitle());
+        assertNotNull(result.getLaunch_date());
 
 
     }
@@ -105,32 +107,34 @@ class BookServicesTest {
 
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("self")
-                        && link.getHref().endsWith("api/book/v1/1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("GET")));
 
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("findAll")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("GET"))
         );
 
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("create")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("POST"))
         );
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("update")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("PUT"))
         );
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("delete")
-                        && link.getHref().endsWith("api/book/v1/1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("DELETE"))
         );
-        assertEquals("Address Test1", result.getTitle());
-        assertEquals("First Name Test1", result.getAuthor());
+        assertEquals("Some Author1", persisted.getAuthor());
+        assertEquals(25F,persisted.getPrice());
+        assertEquals("Some Title1",persisted.getTitle());
+        assertNotNull(persisted.getLaunch_date());
 
 
     }
@@ -170,32 +174,34 @@ class BookServicesTest {
 
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("self")
-                        && link.getHref().endsWith("api/book/v1/1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("GET")));
 
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("findAll")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("GET"))
         );
 
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("create")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("POST"))
         );
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("update")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("PUT"))
         );
         assertNotNull(result.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("delete")
-                        && link.getHref().endsWith("api/book/v1/1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("DELETE"))
         );
-        assertEquals("Address Test1", result.getTitle());
-        assertEquals("First Name Test1", result.getAuthor());
+        assertEquals("Some Author1", persisted.getAuthor());
+        assertEquals(25F,persisted.getPrice());
+        assertEquals("Some Title1",persisted.getTitle());
+        assertNotNull(persisted.getLaunch_date());
 
 
     }
@@ -242,32 +248,34 @@ class BookServicesTest {
 
         assertNotNull(bookOne.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("self")
-                        && link.getHref().endsWith("api/book/v1/1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("GET")));
 
         assertNotNull(bookOne.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("findAll")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("GET"))
         );
 
         assertNotNull(bookOne.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("create")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("POST"))
         );
         assertNotNull(bookOne.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("update")
-                        && link.getHref().endsWith("api/book/v1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("PUT"))
         );
         assertNotNull(bookOne.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("delete")
-                        && link.getHref().endsWith("api/book/v1/1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("DELETE"))
         );
-        assertEquals("Address Test1", bookOne.getTitle());
-        assertEquals("First Name Test1", bookOne.getAuthor());
+        assertEquals("Some Author1", bookOne.getAuthor());
+        assertEquals(25F,bookOne.getPrice());
+        assertEquals("Some Title1",bookOne.getTitle());
+        assertNotNull(bookOne.getLaunch_date());
 
 
 
@@ -281,7 +289,7 @@ class BookServicesTest {
 
         assertNotNull(bookFour.getLinks().stream().
                 anyMatch(link -> link.getRel().value().equals("self")
-                        && link.getHref().endsWith("api/book/v1/1")
+                        && link.getHref().endsWith("api/book")
                         && link.getType().equals("GET")));
 
         assertNotNull(bookFour.getLinks().stream().
@@ -306,8 +314,10 @@ class BookServicesTest {
                         && link.getType().equals("DELETE"))
         );
 
-        assertEquals("First Name Test4", bookFour.getAuthor());
-        assertEquals("Address Test4", bookFour.getTitle());
+        assertEquals("Some Author4", bookFour.getAuthor());
+        assertEquals(25F,bookFour.getPrice());
+        assertEquals("Some Title4",bookFour.getTitle());
+        assertNotNull(bookFour.getLaunch_date());
 
 
 
@@ -344,8 +354,10 @@ class BookServicesTest {
                         && link.getHref().endsWith("api/book/v1/7")
                         && link.getType().equals("DELETE"))
         );
-        assertEquals("Address Test7", BookSeven.getTitle());
-        assertEquals("First Name Test7", BookSeven.getAuthor());
+        assertEquals("Some Author7", BookSeven.getAuthor());
+        assertEquals(25F,BookSeven.getPrice());
+        assertEquals("Some Title7",BookSeven.getTitle());
+        assertNotNull(BookSeven.getLaunch_date());
 
 
 

@@ -2,8 +2,9 @@ package br.com.Alyson.unitetests.mapper.mocks;
 
 import br.com.Alyson.data.dto.books.BookDTO;
 import br.com.Alyson.model.Book;
-import br.com.Alyson.model.Person;
 
+
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,21 +38,22 @@ public class MockBook {
     
     public Book mockEntity(Integer number) {
         Book book = new Book();
-        book.setTitle("Address Test" + number);
-        book.setAuthor("First Name Test" + number);
         book.setId(number.longValue());
-        book.setPrice(number);
+        book.setAuthor("Some Author" + number);
+        book.setLaunch_date(new Date());
+        book.setPrice(25F);
+        book.setTitle("Some Title" + number);
         return book;
     }
 
     public BookDTO mockDTO(Integer number) {
         BookDTO book = new BookDTO();
-        book.setTitle("Address Test" + number);
-        book.setAuthor("First Name Test" + number);
         book.setId(number.longValue());
-        book.setPrice(number);
+        book.setAuthor("Some Author" + number);
+        book.setLaunch_date(new Date());
+        book.setPrice(25F);
+        book.setTitle("Some Title" + number);
         return book;
-
     }
 
 }
