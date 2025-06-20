@@ -1,4 +1,4 @@
-package br.com.Alyson.unitetests.mapper.mocks;
+package br.com.Alyson.unittests.mapper.mocks;
 
 import br.com.Alyson.data.dto.books.BookDTO;
 import br.com.Alyson.model.Book;

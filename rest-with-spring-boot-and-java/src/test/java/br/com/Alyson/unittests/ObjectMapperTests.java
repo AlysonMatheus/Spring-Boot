@@ -1,4 +1,4 @@
-package br.com.erudio.unitetests.mapper;
+package br.com.Alyson.unittests;
 
 import static br.com.Alyson.mapper.ObjectMapper.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.model.Person;
-import br.com.Alyson.unitetests.mapper.mocks.MockPerson;
+import br.com.Alyson.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

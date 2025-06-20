@@ -1,7 +1,6 @@
-package br.com.Alyson.services;
+package br.com.Alyson.unittests.services;
 
 import br.com.Alyson.Controllers.BookController;
-import br.com.Alyson.Controllers.PersonController;
 import br.com.Alyson.Exception.RequiredObjectIsNullException;
 import br.com.Alyson.Exception.ResourceNotFoundException;
 import br.com.Alyson.Repository.BookRepository;
@@ -15,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 
 import static br.com.Alyson.mapper.ObjectMapper.parseListObject;
