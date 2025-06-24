@@ -27,3 +27,5 @@ spring:
 
 server:
   port: 8082
+cors:
+  originPatterns:  http://localhost:8081,http://localhost:3000,https://www.alyson.com.br
