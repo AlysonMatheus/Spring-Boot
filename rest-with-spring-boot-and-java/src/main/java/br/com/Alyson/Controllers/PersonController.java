@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+//@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("api/person/v1")
 @Tag(name = "People", description = "Endpoints for Managing People")
@@ -39,7 +41,7 @@ public class PersonController implements PersonControllerDocs {
             MediaType.APPLICATION_YAML_VALUE,
             MediaType.APPLICATION_YAML_VALUE}
     )
-
+@CrossOrigin(origins = "http://localhost:8081")
     public PersonDTO findById(@PathVariable("id") Long id) {
         var person = service.findById(id);
 
@@ -56,7 +58,7 @@ public class PersonController implements PersonControllerDocs {
                     MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
 
-
+@CrossOrigin(origins = {"http://localhost:8081","https://www.alyson.com.br"})
     public PersonDTO create(@RequestBody PersonDTO person) {
         return service.create(person);
 
