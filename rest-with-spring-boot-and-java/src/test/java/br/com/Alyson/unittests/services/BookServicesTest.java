@@ -4,6 +4,7 @@ import br.com.Alyson.Exception.RequiredObjectIsNullException;
 import br.com.Alyson.Repository.BookRepository;
 import br.com.Alyson.data.dto.books.BookDTO;
 import br.com.Alyson.model.Book;
+import br.com.Alyson.services.BookServices;
 import br.com.Alyson.unittests.mapper.mocks.MockBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

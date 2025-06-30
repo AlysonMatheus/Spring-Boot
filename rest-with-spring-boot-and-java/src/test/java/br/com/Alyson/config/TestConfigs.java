@@ -7,4 +7,5 @@ public interface TestConfigs {
     String HEADER_PARAM_ORIGIN = "Origin";
     String ORIGIN_ALYSON = "https://www.alyson.com.br";
     String ORIGIN_MATHEUS = "https://www.matheus.com.br";
+    String ORIGIN_LOCAL = "http://localhost:8082";
 }

@@ -3,7 +3,7 @@ package br.com.Alyson.Controllers;
 import br.com.Alyson.Controllers.docs.PersonControllerDocs;
 import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
-import br.com.Alyson.unittests.services.PersonServices;
+import br.com.Alyson.services.PersonServices;
 
 
 import io.swagger.v3.oas.annotations.tags.Tag;
