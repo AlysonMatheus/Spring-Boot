@@ -92,19 +92,22 @@ public class PersonServices {
         return dto;
 
     }
+
     @Transactional
     public PersonDTO disablePerson(Long id) {
         logger.info("Disable Person!");
 
-         repository.findById(id)
+        repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
         repository.disablePerson(id);
+
         var entity = repository.findById(id).get();
         var dto = parseObject(entity, PersonDTO.class);
         addHateoasLinks(dto);
         return dto;
 
     }
+
     public void delete(Long id) {
         logger.info("Delete all People!");
 
@@ -122,7 +125,7 @@ public class PersonServices {
 
         dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("update").withType("PUT"));
 
-        dto.add(linkTo(methodOn(PersonController.class).disablePerson(dto)).withRel("update").withType("PATCH"));
+        dto.add(linkTo(methodOn(PersonController.class).disablePerson(dto.getId())).withRel("update").withType("PATCH"));
 
         dto.add(linkTo(methodOn(PersonController.class).delete(dto.getId())).withRel("delete").withType("DELETE"));
     }

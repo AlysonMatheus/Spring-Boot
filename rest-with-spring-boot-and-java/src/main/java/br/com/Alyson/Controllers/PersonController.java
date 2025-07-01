@@ -29,7 +29,7 @@ public class PersonController implements PersonControllerDocs {
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
             MediaType.APPLICATION_YAML_VALUE})
-    public List<PersonDTO>findAll() {
+    public List<PersonDTO> findAll() {
         return service.findAll();
 
     }
@@ -92,6 +92,17 @@ public class PersonController implements PersonControllerDocs {
     public PersonDTO update(@RequestBody PersonDTO person) {
         return service.update(person);
 
+    }
+
+    @PatchMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE}
+    )
+    @Override
+    public PersonDTO disablePerson(@PathVariable("id") Long id) {
+        return service.disablePerson(id);
     }
 
     @Override
