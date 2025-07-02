@@ -1,4 +1,4 @@
-package br.com.Alyson.integrationtests.controllers.withjson;
+package br.com.Alyson.integrationtests.controllers.cors.withjson;
 
 import br.com.Alyson.config.TestConfigs;
 import br.com.Alyson.integrationtests.dto.PersonDTO;
@@ -14,15 +14,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
-
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PersonControllerTest extends AbstractIntegrationTest {
+class PersonControllerCorsTest extends AbstractIntegrationTest {
 
 
     private static RequestSpecification specification;
@@ -78,6 +76,7 @@ class PersonControllerTest extends AbstractIntegrationTest {
         assertEquals("Matheus", createdPerson.getLastName());
         assertEquals("Osvaldo Cruz - São Paulo - BRASIL", createdPerson.getAddress());
         assertEquals("Male", createdPerson.getGender());
+        assertTrue(createdPerson.getEnabled());
 
 
     }
@@ -150,6 +149,7 @@ class PersonControllerTest extends AbstractIntegrationTest {
         assertEquals("Matheus", createdPerson.getLastName());
         assertEquals("Osvaldo Cruz - São Paulo - BRASIL", createdPerson.getAddress());
         assertEquals("Male", createdPerson.getGender());
+        assertTrue(createdPerson.getEnabled());
     }
 
     @Test
@@ -188,5 +188,6 @@ class PersonControllerTest extends AbstractIntegrationTest {
         person.setLastName("Matheus");
         person.setAddress("Osvaldo Cruz - São Paulo - BRASIL");
         person.setGender("Male");
+        person.setEnabled(true);
     }
 }
