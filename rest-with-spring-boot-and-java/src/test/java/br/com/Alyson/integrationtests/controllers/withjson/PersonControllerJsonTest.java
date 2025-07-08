@@ -4,6 +4,7 @@ import br.com.Alyson.config.TestConfigs;
 import br.com.Alyson.integrationtests.dto.PersonDTO;
 import br.com.Alyson.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.builder.RequestSpecBuilder;
@@ -13,6 +14,8 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertTrue;
@@ -174,7 +177,7 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
         assertFalse(createdPerson.getEnabled());
     }
  @Test
-    @Order(4)
+    @Order(5)
     void deleteTest() throws JsonProcessingException {
 
 
@@ -200,4 +203,51 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
         person.setGender("Male");
         person.setEnabled(true);
     }
-}
+    @Test
+    @Order(6)
+    void findAllTest() throws JsonProcessingException {
+
+
+        var content = given(specification)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+
+                .when()
+                .get()
+                .then()
+                .statusCode(200)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .extract()
+                .body()
+                .asString();
+        List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
+
+        PersonDTO personOne = people.get(0);
+        person = personOne;
+
+
+        assertNotNull(personOne.getId());
+        Assertions.assertTrue(personOne.getId() > 0);
+
+
+        assertEquals("Alyson", personOne.getFirstName());
+        assertEquals("Senna", personOne.getLastName());
+        assertEquals("Osvaldo Cruz-Brsil", personOne.getAddress());
+        assertEquals("Male", personOne.getGender());
+        assertTrue(personOne.getEnabled());
+
+        PersonDTO personFour = people.get(4);
+
+
+
+        assertNotNull(personOne.getId());
+        Assertions.assertTrue(personOne.getId() > 0);
+
+
+        assertEquals("Cassio", personFour.getFirstName());
+        assertEquals("Ramos", personFour.getLastName());
+        assertEquals("São Paulo- Brasil - 2025", personFour.getAddress());
+        assertEquals("Male", personFour.getGender());
+        assertTrue(personFour.getEnabled());
+    }
+
+    }
