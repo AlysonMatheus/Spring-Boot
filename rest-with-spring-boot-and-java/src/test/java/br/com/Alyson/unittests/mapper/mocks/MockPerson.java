@@ -39,7 +39,7 @@ public class MockPerson {
         Person person = new Person();
         person.setAddress("Address Test" + number);
         person.setFirstName("First Name Test" + number);
-        person.setGender(((number % 2)==0) ? "Male" : "Female");
+//        person.setGender(((number % 2)==0) ? "Male" : "Female");
         person.setId(number.longValue());
         person.setLastName("Last Name Test" + number);
         return person;
@@ -49,7 +49,7 @@ public class MockPerson {
         PersonDTO person = new PersonDTO();
         person.setAddress("Address Test" + number);
         person.setFirstName("First Name Test" + number);
-        person.setGender(((number % 2)==0) ? "Male" : "Female");
+//        person.setGender(((number % 2)==0) ? "Male" : "Female");
         person.setId(number.longValue());
         person.setLastName("Last Name Test" + number);
         return person;

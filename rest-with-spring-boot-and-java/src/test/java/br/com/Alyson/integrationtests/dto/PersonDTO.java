@@ -5,6 +5,8 @@ package br.com.Alyson.integrationtests.dto;
 import br.com.Alyson.serializer.GenderSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sun.xml.txw2.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 
 import java.io.Serializable;
@@ -13,6 +15,7 @@ import java.util.Objects;
 
 //@JsonPropertyOrder({"id","first_Name","last_Name","address", "gender"})
 //@JsonFilter("PersonFilter")
+@XmlRootElement
 public class PersonDTO implements Serializable {
     private static final long serialVersionUID = 1l;
 

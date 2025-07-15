@@ -38,7 +38,7 @@ public class PersonServices {
     PersonMapper converter;
 
 
-    public List<PersonDTO> findAll() {
+    public List<PersonDTO> findAll( ) {
         logger.info("Finding all People!");
         var persons = parseListObject(repository.findAll(), PersonDTO.class);
         persons.forEach(this::addHateoasLinks);
