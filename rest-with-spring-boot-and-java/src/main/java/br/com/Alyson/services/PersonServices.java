@@ -6,7 +6,7 @@ import br.com.Alyson.Exception.ResourceNotFoundException;
 import br.com.Alyson.Repository.PersonRepository;
 import br.com.Alyson.data.dto.v1.PersonDTO;
 
-import static br.com.Alyson.mapper.ObjectMapper.parseListObject;
+
 import static br.com.Alyson.mapper.ObjectMapper.parseObject;
 
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
@@ -20,9 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
+
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+
 import org.springframework.stereotype.Service;
 
 
@@ -37,8 +42,11 @@ public class PersonServices {
     @Autowired
     PersonMapper converter;
 
+    @Autowired
+    PagedResourcesAssembler<PersonDTO> assembler;
 
-    public Page<PersonDTO> findAll(Pageable pageable) {
+
+    public PagedModel<EntityModel<PersonDTO>> findAll(Pageable pageable) {
         logger.info("Finding all People!");
         var people = repository.findAll(pageable);
         var peopleWithLinks = people.map(person -> {
@@ -46,7 +54,11 @@ public class PersonServices {
             addHateoasLinks(dto);
             return dto;
         });
-        return peopleWithLinks;
+        Link findallLink = WebMvcLinkBuilder.linkTo(
+                WebMvcLinkBuilder.methodOn(PersonController.class).findAll(
+                        pageable.getPageNumber(),
+                        pageable.getPageSize(), String.valueOf(pageable.getSort()))).withSelfRel();
+        return assembler.toModel(peopleWithLinks,findallLink);
     }
 
     public PersonDTO findById(Long id) {
