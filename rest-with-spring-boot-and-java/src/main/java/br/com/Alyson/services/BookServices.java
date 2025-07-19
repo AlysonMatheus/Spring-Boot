@@ -42,7 +42,7 @@ public class BookServices {
     public PagedModel<EntityModel<BookDTO>> findAll(Pageable pageable) {
         logger.info("Finding all Books!");
         var people = repository.findAll(pageable);
-        var peopleWithLinks = people.map(book -> {
+        var bookWithLinks = people.map(book -> {
             var dto = parseObject(book, BookDTO.class);
             addHateoasLinks(dto);
             return dto;
@@ -51,7 +51,7 @@ public class BookServices {
                 WebMvcLinkBuilder.methodOn(PersonController.class).findAll(
                         pageable.getPageNumber(),
                         pageable.getPageSize(), String.valueOf(pageable.getSort()))).withSelfRel();
-        return assembler.toModel(peopleWithLinks,findallLink);
+        return assembler.toModel(bookWithLinks,findallLink);
     }
 
     public BookDTO findById(Long id) {

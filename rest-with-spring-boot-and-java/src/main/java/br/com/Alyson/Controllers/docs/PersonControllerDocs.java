@@ -43,6 +43,31 @@ public interface PersonControllerDocs {
             @RequestParam(value = "size", defaultValue = "12")Integer size,
             @RequestParam(value = "direction", defaultValue = "asc")String direction
     );
+  @Operation(summary = "Find People by FirstName",
+            description = "Find People by their Firsts Names",
+            tags = {"People"},
+            responses = {
+                    @ApiResponse(description = "Success",
+                            responseCode = "200",
+                            content =
+                                    {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                            array = @ArraySchema(schema = @Schema(implementation = PersonDTO.class)))
+                                    }),
+
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bau Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "504", content = @Content)
+            }
+
+    )
+    ResponseEntity<PagedModel<EntityModel<PersonDTO>>> findByName(
+            @PathVariable("'firstName") String firstName,
+            @RequestParam(value = "page", defaultValue = "0")Integer page,
+            @RequestParam(value = "size", defaultValue = "12")Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc")String direction
+    );
 
 
     @Operation(summary = "Finds a Person",
