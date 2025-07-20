@@ -2,6 +2,7 @@ package br.com.Alyson.integrationtests.controllers.withjson;
 
 import br.com.Alyson.config.TestConfigs;
 import br.com.Alyson.integrationtests.dto.PersonDTO;
+import br.com.Alyson.integrationtests.dto.wrappers.WrapperPersonDTO;
 import br.com.Alyson.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -219,7 +220,8 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                 .extract()
                 .body()
                 .asString();
-        List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
+       WrapperPersonDTO wrapper = objectMapper.readValue(content, WrapperPersonDTO.class);
+      List<PersonDTO> people = wrapper.getEmbedded().getPeople();
 
         PersonDTO personOne = people.get(0);
         person = personOne;
