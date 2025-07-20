@@ -74,7 +74,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
 
 
         assertEquals("Linus", createdPerson.getFirstName());
-        assertEquals("Stallman", createdPerson.getLastName());
+        assertEquals("Benedict Torvalds", createdPerson.getLastName());
         assertEquals("Helsinki - Finland", createdPerson.getAddress());
         assertEquals("Female", createdPerson.getGender());
         assertTrue(createdPerson.getEnabled());
@@ -109,7 +109,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
 
 
     assertEquals("Linus", createdPerson.getFirstName());
-    assertEquals("Benedict Torvalds", createdPerson.getLastName());
+    assertEquals("Stallman", createdPerson.getLastName());
     assertEquals("Helsinki - Finland", createdPerson.getAddress());
     assertEquals("Female", createdPerson.getGender());
     assertTrue(createdPerson.getEnabled());
