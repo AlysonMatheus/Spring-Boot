@@ -2,6 +2,7 @@ package br.com.Alyson.integrationtests.controllers.withxml;
 
 import br.com.Alyson.config.TestConfigs;
 import br.com.Alyson.integrationtests.dto.PersonDTO;
+import br.com.Alyson.integrationtests.dto.wrappers.xml.PagedModelPerson;
 import br.com.Alyson.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -225,7 +226,9 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
                 .extract()
                 .body()
                 .asString();
-        List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
+
+        PagedModelPerson wrapper = objectMapper.readValue(content, PagedModelPerson.class);
+        List<PersonDTO> people = wrapper.getContent();
 
         PersonDTO personOne = people.get(0);
         person = personOne;

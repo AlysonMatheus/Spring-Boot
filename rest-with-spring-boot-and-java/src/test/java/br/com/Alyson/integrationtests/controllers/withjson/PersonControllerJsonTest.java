@@ -2,10 +2,9 @@ package br.com.Alyson.integrationtests.controllers.withjson;
 
 import br.com.Alyson.config.TestConfigs;
 import br.com.Alyson.integrationtests.dto.PersonDTO;
-import br.com.Alyson.integrationtests.dto.wrappers.WrapperPersonDTO;
+import br.com.Alyson.integrationtests.dto.wrappers.json.WrapperPersonDTO;
 import br.com.Alyson.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.builder.RequestSpecBuilder;

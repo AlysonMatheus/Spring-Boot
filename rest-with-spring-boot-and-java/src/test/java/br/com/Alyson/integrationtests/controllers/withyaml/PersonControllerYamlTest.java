@@ -3,6 +3,7 @@ package br.com.Alyson.integrationtests.controllers.withyaml;
 import br.com.Alyson.config.TestConfigs;
 import br.com.Alyson.integrationtests.controllers.withyaml.mapper.YAMLMapper;
 import br.com.Alyson.integrationtests.dto.PersonDTO;
+import br.com.Alyson.integrationtests.dto.wrappers.xml.PagedModelPerson;
 import br.com.Alyson.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -234,8 +235,8 @@ class PersonControllerYamlTest extends AbstractIntegrationTest {
                 .contentType(MediaType.APPLICATION_YAML_VALUE)
                 .extract()
                 .body()
-                .as(PersonDTO[].class, objectMapper);
-        List<PersonDTO> people = Arrays.asList(response);
+                .as(PagedModelPerson.class, objectMapper);
+        List<PersonDTO> people = response.getContent();
 
         PersonDTO personOne = people.get(0);
         person = personOne;
