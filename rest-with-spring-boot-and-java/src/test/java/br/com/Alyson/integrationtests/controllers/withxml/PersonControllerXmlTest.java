@@ -76,7 +76,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
         assertEquals("Linus", createdPerson.getFirstName());
         assertEquals("Stallman", createdPerson.getLastName());
         assertEquals("Helsinki - Finland", createdPerson.getAddress());
-        assertEquals("F", createdPerson.getGender());
+        assertEquals("Female", createdPerson.getGender());
         assertTrue(createdPerson.getEnabled());
     }
 
@@ -111,7 +111,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
     assertEquals("Linus", createdPerson.getFirstName());
     assertEquals("Benedict Torvalds", createdPerson.getLastName());
     assertEquals("Helsinki - Finland", createdPerson.getAddress());
-    assertEquals("F", createdPerson.getGender());
+    assertEquals("Female", createdPerson.getGender());
     assertTrue(createdPerson.getEnabled());
 
 
@@ -146,7 +146,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
         assertEquals("Linus", createdPerson.getFirstName());
         assertEquals("Benedict Torvalds", createdPerson.getLastName());
         assertEquals("Helsinki - Finland", createdPerson.getAddress());
-        assertEquals("F", createdPerson.getGender());
+        assertEquals("Female", createdPerson.getGender());
         assertTrue(createdPerson.getEnabled());
     }
  @Test
@@ -177,7 +177,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
         assertEquals("Linus", createdPerson.getFirstName());
         assertEquals("Benedict Torvalds", createdPerson.getLastName());
         assertEquals("Helsinki - Finland", createdPerson.getAddress());
-        assertEquals("F", createdPerson.getGender());
+        assertEquals("Female", createdPerson.getGender());
         assertFalse(createdPerson.getEnabled());
     }
  @Test
@@ -187,6 +187,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
 
        given(specification)
                 .contentType(MediaType.APPLICATION_XML_VALUE)
+
                .accept(MediaType.APPLICATION_XML_VALUE)
                 .pathParam("id",person.getId())
                 .when()
@@ -205,7 +206,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
         person.setFirstName("Linus");
         person.setLastName("Benedict Torvalds");
         person.setAddress("Helsinki - Finland");
-        person.setGender("F");
+        person.setGender("Female");
         person.setEnabled(true);
     }
     @Test
@@ -215,7 +216,7 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
 
         var content = given(specification)
                 .accept(MediaType.APPLICATION_XML_VALUE)
-
+                .queryParams("page",3,"size",12,"asc")
                 .when()
                 .get()
                 .then()
@@ -234,10 +235,10 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
         Assertions.assertTrue(personOne.getId() > 0);
 
 
-        assertEquals("Alyson", personOne.getFirstName());
-        assertEquals("Senna", personOne.getLastName());
-        assertEquals("Osvaldo Cruz-Brsil", personOne.getAddress());
-        assertEquals("F", personOne.getGender());
+        assertEquals("Allegra", personOne.getFirstName());
+        assertEquals("Dome", personOne.getLastName());
+        assertEquals("57 Roxbury Pass", personOne.getAddress());
+        assertEquals("Female", personOne.getGender());
         assertTrue(personOne.getEnabled());
 
         PersonDTO personFour = people.get(4);
@@ -248,10 +249,10 @@ class PersonControllerXmlTest extends AbstractIntegrationTest {
         Assertions.assertTrue(personOne.getId() > 0);
 
 
-        assertEquals("Cassio", personFour.getFirstName());
-        assertEquals("Ramos", personFour.getLastName());
-        assertEquals("São Paulo- Brasil - 2025", personFour.getAddress());
-        assertEquals("F", personFour.getGender());
+        assertEquals("Almeria", personFour.getFirstName());
+        assertEquals("Curm", personFour.getLastName());
+        assertEquals("34 Burrows Point", personFour.getAddress());
+        assertEquals("Female", personFour.getGender());
         assertTrue(personFour.getEnabled());
     }
 

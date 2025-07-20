@@ -5,7 +5,7 @@ package br.com.Alyson.data.dto.v1;
 //import com.fasterxml.jackson.annotation.JsonProperty;
 //import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import br.com.Alyson.serializer.GenderSerializer;
+//import br.com.Alyson.serializer.GenderSerializer;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -41,7 +41,7 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     private String address;
 
     // @JsonIgnore
-    @JsonSerialize(using = GenderSerializer.class)
+//    @JsonSerialize(using = GenderSerializer.class)
     private String gender;
     private Boolean enabled;
 

@@ -2,7 +2,7 @@ package br.com.Alyson.integrationtests.dto;
 
 
 
-import br.com.Alyson.serializer.GenderSerializer;
+//import br.com.Alyson.serializer.GenderSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sun.xml.txw2.annotation.XmlElement;
@@ -36,7 +36,7 @@ public class PersonDTO implements Serializable {
     private String address;
 
     // @JsonIgnore
-    @JsonSerialize(using = GenderSerializer.class)
+//    @JsonSerialize(using = GenderSerializer.class)
     private String gender;
 
     private Boolean enabled;
