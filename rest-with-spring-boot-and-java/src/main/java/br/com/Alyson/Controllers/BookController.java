@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/book")
+@RequestMapping("api/book/v1")
 @Tag(name = "Book", description = "Endpoints for Managing Book")
 public class BookController implements BookControllersDocs {
 
