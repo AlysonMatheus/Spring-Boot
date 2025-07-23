@@ -22,4 +22,6 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
     // Leandro, Fernanda, Alessandra, Amanda
     @Query("SELECT p FROM Person p  WHERE p.firstName LIKE LOWER(CONCAT('%' ,:firstName, '%'))")
     Page<Person> findPeopleByName(@Param("firstName") String firstName, Pageable pageable);
+
+
 }
