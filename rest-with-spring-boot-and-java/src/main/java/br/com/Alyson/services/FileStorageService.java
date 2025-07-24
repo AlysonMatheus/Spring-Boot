@@ -1,11 +1,14 @@
 package br.com.Alyson.services;
 
 import br.com.Alyson.Controllers.FileController;
+import br.com.Alyson.Exception.FileNotFoundException;
 import br.com.Alyson.Exception.FileStorageException;
 import br.com.Alyson.config.FileStorageConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,5 +64,23 @@ public class FileStorageService {
             throw new FileStorageException("Could not store file" + filename + ". Please try Again", e);
         }
         return filename; // retorna o nome do arquivo
+    }
+    public Resource loadFileAsResource (String fileName){
+        try {
+            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();// internamente o java vai pegar o arquivo esta sendo salvo (ele vai defenir o caminho)
+            Resource resource =  new UrlResource(filePath.toUri());
+            if (resource.exists()){
+                return resource;
+            }else {
+                logger.error("File not found" + fileName);
+                throw new FileNotFoundException("File not found" + fileName);
+            }
+
+        }catch (Exception e){
+            logger.error("File not found" + fileName, e);
+            throw new FileNotFoundException("File not found" + fileName, e);
+
+        }
+
     }
 }
