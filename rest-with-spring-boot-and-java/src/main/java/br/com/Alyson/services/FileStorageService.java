@@ -18,18 +18,18 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileStorageService {
 
-    private  static final Logger logger = LoggerFactory.getLogger(FileController.class);
+    private  static final Logger logger = LoggerFactory.getLogger(FileStorageService.class);
 
     //defino a varialvel aonde vamos armezanar os aqruivos
     private final Path fileStorageLocation;
 
+
+
     @Autowired
     //Lançando execeção caso ocorra erro quando for lançado
-    public FileStorageService(FileStorageConfig fileStorageLocation) {
+    public FileStorageService(FileStorageConfig fileStorageConfig) {
         // caminho do diretorio para o salvamento do arquivo... normalizando eles tratando os caracteres invalidos
-        Path path = Paths.get(fileStorageLocation
-                        .getUpload_dir())
-                .toAbsolutePath().normalize();
+        Path path = Paths.get(fileStorageConfig.getUpload_dir()).toAbsolutePath().toAbsolutePath().normalize();
 
         this.fileStorageLocation = path;
 
@@ -55,7 +55,7 @@ public class FileStorageService {
             // vai determinar o path ate onde o arquivo vai ser salvo e o nome do arquivo
             Path targetLocation = this.fileStorageLocation.resolve(filename);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);// copia o nome do arquivo pro sistema,
-            // convertendo o arquivo pra uma Inputstream, passando o destino e pr fim verifica se o arquivo ja existe( com o mesmo nome)
+            // convertendo o arquivo pra uma Inputstream, passando o destino e pra fim verifica se o arquivo ja existe( com o mesmo nome)
         } catch (Exception e) {
             logger.error("Could not store file" + filename + ". Please try Again");
             throw new FileStorageException("Could not store file" + filename + ". Please try Again", e);
