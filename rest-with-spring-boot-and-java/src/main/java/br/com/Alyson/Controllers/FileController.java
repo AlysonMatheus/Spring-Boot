@@ -7,11 +7,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -50,9 +50,24 @@ public class FileController implements FileControllerDocs {
                 .map(file -> uploadFile(file))
                 .collect(Collectors.toList());
     }
-
+@GetMapping("downloadFile/{fileName:.+}")
     @Override
-    public ResponseEntity<ResponseEntity> downloadFile(String fileName, HttpServletRequest request) {
-        return null;
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+    Resource resource = service.loadFileAsResource(fileName); // lendo o arquivo em disco atraves do nome
+    String contentType = null;//determina o contentType
+    try {
+        contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());// pega o caminho absoluto do arquivo, tenta obter o contentType atraves disso
+    }catch (Exception e){
+        logger.error("Could not determine file type!");
+
+    }
+    if (contentType == null ){// caso ele seja null, seta um contentType default
+        contentType = "application/octet - stream";
+    }
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))// tipo de conteudo
+                .header(HttpHeaders.CONTENT_DISPOSITION,// dizendo pra response que no cabeçalho estamos devolvendo um anexo
+                        "attachment; filename=\""+ resource.getFilename() + "\"")
+                .body(resource);// passando no body o arquivo
     }
 }

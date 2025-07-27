@@ -107,7 +107,7 @@ public interface BookControllersDocs {
             }
 
     )
-    BookDTO update(@RequestBody BookDTO person);
+    BookDTO update(@RequestBody BookDTO bookDTO);
 
 
     @Operation(summary = "Delete a Books",
