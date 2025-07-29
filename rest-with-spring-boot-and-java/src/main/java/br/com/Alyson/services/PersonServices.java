@@ -1,6 +1,8 @@
 package br.com.Alyson.services;
 
 import br.com.Alyson.Controllers.PersonController;
+import br.com.Alyson.Exception.BadReuqestException;
+import br.com.Alyson.Exception.FileStorageException;
 import br.com.Alyson.Exception.RequiredObjectIsNullException;
 import br.com.Alyson.Exception.ResourceNotFoundException;
 import br.com.Alyson.Repository.PersonRepository;
@@ -10,6 +12,8 @@ import br.com.Alyson.data.dto.v1.PersonDTO;
 import static br.com.Alyson.mapper.ObjectMapper.parseObject;
 
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
+import br.com.Alyson.file.importer.contract.FileImporter;
+import br.com.Alyson.file.importer.factory.FileImporterFactory;
 import br.com.Alyson.mapper.custom.PersonMapper;
 import br.com.Alyson.model.Person;
 import jakarta.transaction.Transactional;
@@ -30,6 +34,12 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -42,6 +52,8 @@ public class PersonServices {
     PersonRepository repository;
     @Autowired
     PersonMapper converter;
+    @Autowired
+    FileImporterFactory importer;
 
     @Autowired
     PagedResourcesAssembler<PersonDTO> assembler;
@@ -66,7 +78,6 @@ public class PersonServices {
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
         var dto = parseObject(entity, PersonDTO.class);
         addHateoasLinks(dto);
-
         return dto;
 
     }
@@ -74,12 +85,36 @@ public class PersonServices {
 
     public PersonDTO create(PersonDTO person) {
         if (person == null) throw new RequiredObjectIsNullException();
-
         logger.info("Finding all People!");
         var entity = parseObject(person, Person.class);
         var dto = parseObject(repository.save(entity), PersonDTO.class);
         addHateoasLinks(dto);
         return dto;
+    }
+   // verifica se o multipartiFile esta preenchido se não ele lança uma execeção
+
+    public List<PersonDTO> massCreation(MultipartFile file) throws IOException {
+        logger.info("Importing People from file!");
+        if (file.isEmpty()) throw new BadReuqestException("Please set a Valid File!");
+        try (InputStream inputStream = file.getInputStream())// passa o nome de qual ele deve utilizar na factory
+        {
+            String filename = Optional.ofNullable(file.getOriginalFilename()).orElseThrow(() -> new BadReuqestException("File name cannot be null"));
+            FileImporter importer = this.importer.getImporter(filename);
+            List<Person> entites = importer.importFile(inputStream).stream()// chama o importador e manda importar, passando o input stream
+                    .map(dto -> repository.save(parseObject(dto, Person.class))).toList();// retorna uma lista de personDTO, converte e salva no banco(essa lista nao pode ser devolvida como resposta)
+            return entites.stream()// entao ele intera nessa lista de person, passando de entidade para dto e adcionando links hateoas e no final converte em uma lista e devolve a resposta
+                    .map(entity -> {
+                        var dto = parseObject(entity, PersonDTO.class);
+                        addHateoasLinks(dto);
+                        return dto;
+                    })
+                    .toList();
+
+
+        } catch (Exception e){
+            throw  new FileStorageException("Error processing the file!");
+        }
+
     }
 
     public PersonDTOV2 createV2(PersonDTOV2 person) {
