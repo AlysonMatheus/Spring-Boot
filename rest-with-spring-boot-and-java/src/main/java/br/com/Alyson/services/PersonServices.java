@@ -93,7 +93,7 @@ public class PersonServices {
     }
    // verifica se o multipartiFile esta preenchido se não ele lança uma execeção
 
-    public List<PersonDTO> massCreation(MultipartFile file) throws IOException {
+    public List<PersonDTO> massCreation(MultipartFile file)  {
         logger.info("Importing People from file!");
         if (file.isEmpty()) throw new BadReuqestException("Please set a Valid File!");
         try (InputStream inputStream = file.getInputStream())// passa o nome de qual ele deve utilizar na factory

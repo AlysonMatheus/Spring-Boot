@@ -90,16 +90,13 @@ public class PersonController implements PersonControllerDocs {
         return service.create(person);
 
     }   @Override
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE,
-            MediaType.APPLICATION_YAML_VALUE},
+    @PostMapping( value = "massCreation",
             produces = {MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
 
 //@CrossOrigin(origins = {"http://localhost:8081","https://www.alyson.com.br"})
-    public List<PersonDTO> massCreation(MultipartFile file) {
+    public List<PersonDTO> massCreation(@RequestParam("file") MultipartFile file) {
         return service.massCreation(file);
 
     }
