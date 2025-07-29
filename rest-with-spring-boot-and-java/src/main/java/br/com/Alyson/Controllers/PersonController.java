@@ -18,6 +18,9 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 //@CrossOrigin(origins = "http://localhost:8081")
@@ -86,7 +89,21 @@ public class PersonController implements PersonControllerDocs {
     public PersonDTO create(@RequestBody PersonDTO person) {
         return service.create(person);
 
+    }   @Override
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_YAML_VALUE})
+
+//@CrossOrigin(origins = {"http://localhost:8081","https://www.alyson.com.br"})
+    public List<PersonDTO> massCreation(MultipartFile file) {
+        return service.massCreation(file);
+
     }
+
 
     @Override
     @PostMapping(value = "/V2",
