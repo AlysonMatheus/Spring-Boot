@@ -87,16 +87,27 @@ public class PersonServices {
         return dto;
 
     }
+
     public Resource exportPage(Pageable pageable, String acceptHeader) {
+
         logger.info("Exporting a People page!");
-        var people = repository.findAll(pageable).map(person -> parseObject(person, PersonDTO.class)).getContent();
+
+        // Busca uma página de entidades 'Person' no banco de dados, conforme a paginação fornecida,
+        // converte cada entidade em um DTO e extrai apenas a lista de conteúdo da página
+        var people = repository.findAll(pageable)
+                .map(person -> parseObject(person, PersonDTO.class)) // Conversão para DTO
+                .getContent(); // Extrai a lista de objetos da página (sem metadados)
+
         try {
+            // Obtém o exportador de arquivos apropriado com base no tipo de mídia solicitado (CSV, Excel, etc.)
             FileExporter exporter = this.exporter.getExporter(acceptHeader);
 
+            // Exporta a lista de pessoas e retorna o arquivo como um recurso (Resource)
             return exporter.exportFile(people);
-        } catch (Exception e) {
-            throw new RuntimeException("Error during file export!",e);
 
+        } catch (Exception e) {
+            // Em caso de erro durante a exportação, lança uma exceção com mensagem personalizada
+            throw new RuntimeException("Error during file export!", e);
         }
     }
 
@@ -109,9 +120,9 @@ public class PersonServices {
         addHateoasLinks(dto);
         return dto;
     }
-   // verifica se o multipartiFile esta preenchido se não ele lança uma execeção
+    // verifica se o multipartiFile esta preenchido se não ele lança uma execeção
 
-    public List<PersonDTO> massCreation(MultipartFile file)  {
+    public List<PersonDTO> massCreation(MultipartFile file) {
         logger.info("Importing People from file!");
         if (file.isEmpty()) throw new BadReuqestException("Please set a Valid File!");
         try (InputStream inputStream = file.getInputStream())// passa o nome de qual ele deve utilizar na factory
@@ -129,8 +140,8 @@ public class PersonServices {
                     .toList();
 
 
-        } catch (Exception e){
-            throw  new FileStorageException("Error processing the file!");
+        } catch (Exception e) {
+            throw new FileStorageException("Error processing the file!");
         }
 
     }

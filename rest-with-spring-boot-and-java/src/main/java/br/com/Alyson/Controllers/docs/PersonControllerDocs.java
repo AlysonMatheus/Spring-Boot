@@ -3,11 +3,14 @@ package br.com.Alyson.Controllers.docs;
 import br.com.Alyson.data.dto.books.BookDTO;
 import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
+import br.com.Alyson.file.exporter.MediaTypes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
@@ -43,6 +46,32 @@ public interface PersonControllerDocs {
             @RequestParam(value = "page", defaultValue = "0")Integer page,
             @RequestParam(value = "size", defaultValue = "12")Integer size,
             @RequestParam(value = "direction", defaultValue = "asc")String direction
+    );
+
+    @Operation(summary = "Exporting  People",
+            description = "Exporting a Page off People in XLSX and CSV format",
+            tags = {"People"},
+            responses = {
+                    @ApiResponse(description = "Success",
+                            responseCode = "200",
+                            content =
+                                    {@Content(mediaType = MediaTypes.APPLICATION_XLSX_VALUE),
+                                    @Content(mediaType = MediaTypes.APPLICATION_XLSX_VALUE)
+                                    }),
+
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bau Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "504", content = @Content)
+            }
+
+    )
+    ResponseEntity<Resource> exportPage(
+            @RequestParam(value = "page", defaultValue = "0")Integer page,
+            @RequestParam(value = "size", defaultValue = "12")Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc")String direction,
+            HttpServletRequest request
     );
     @Operation(summary = "Massive People Creation",
             description = "Massive People Creation with upload XLSX or CSV",

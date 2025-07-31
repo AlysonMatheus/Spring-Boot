@@ -7,7 +7,9 @@ import br.com.Alyson.services.PersonServices;
 
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +43,17 @@ public class PersonController implements PersonControllerDocs {
             @RequestParam(value = "page", defaultValue = "0")Integer page,
             @RequestParam(value = "size", defaultValue = "12")Integer size,
             @RequestParam(value = "direction", defaultValue = "asc")String direction
+    ){
+       var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
+        Pageable pageable = PageRequest.of(page,size, Sort.by(sortDirection,"firstName"));
+        return ResponseEntity.ok(service.findAll(pageable));
+    }
+    @Override
+   public ResponseEntity<Resource> exportPage(
+            @RequestParam(value = "page", defaultValue = "0")Integer page,
+            @RequestParam(value = "size", defaultValue = "12")Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc")String direction,
+            HttpServletRequest request
     ){
        var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
         Pageable pageable = PageRequest.of(page,size, Sort.by(sortDirection,"firstName"));
