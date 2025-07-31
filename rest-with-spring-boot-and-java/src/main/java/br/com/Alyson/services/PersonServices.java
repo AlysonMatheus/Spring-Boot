@@ -12,6 +12,9 @@ import br.com.Alyson.data.dto.v1.PersonDTO;
 import static br.com.Alyson.mapper.ObjectMapper.parseObject;
 
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
+import br.com.Alyson.file.exporter.MediaTypes;
+import br.com.Alyson.file.exporter.contract.FileExporter;
+import br.com.Alyson.file.exporter.factory.FileExporterFactory;
 import br.com.Alyson.file.importer.contract.FileImporter;
 import br.com.Alyson.file.importer.factory.FileImporterFactory;
 import br.com.Alyson.mapper.custom.PersonMapper;
@@ -25,6 +28,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -54,6 +58,8 @@ public class PersonServices {
     PersonMapper converter;
     @Autowired
     FileImporterFactory importer;
+    @Autowired
+    FileExporterFactory exporter;
 
     @Autowired
     PagedResourcesAssembler<PersonDTO> assembler;
@@ -80,6 +86,18 @@ public class PersonServices {
         addHateoasLinks(dto);
         return dto;
 
+    }
+    public Resource exportPage(Pageable pageable, String acceptHeader) {
+        logger.info("Exporting a People page!");
+        var people = repository.findAll(pageable).map(person -> parseObject(person, PersonDTO.class)).getContent();
+        try {
+            FileExporter exporter = this.exporter.getExporter(acceptHeader);
+
+            return exporter.exportFile(people);
+        } catch (Exception e) {
+            throw new RuntimeException("Error during file export!",e);
+
+        }
     }
 
 
@@ -187,6 +205,8 @@ public class PersonServices {
         dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("update").withType("PUT"));
         dto.add(linkTo(methodOn(PersonController.class).disablePerson(dto.getId())).withRel("update").withType("PATCH"));
         dto.add(linkTo(methodOn(PersonController.class).delete(dto.getId())).withRel("delete").withType("DELETE"));
+        dto.add(linkTo(methodOn(PersonController.class).exportPage(
+                1, 12, "asc", MediaTypes.APPLICATION_XLSX_VALUE).withRel("exportPage").withType("GET")));
     }
 
 
