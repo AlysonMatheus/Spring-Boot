@@ -13,24 +13,40 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-@Component
-public class CsvExporter implements FileExporter {
+@Component // Torna essa classe um componente do Spring (pode ser injetado com @Autowired)
+public class CsvExporter implements FileExporter { // Implementa a interface FileExporter
 
     @Override
     public Resource exportFile(List<PersonDTO> people) throws Exception {
+        // Cria um stream de saída em memória (em vez de salvar em arquivo físico)
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        // Writer para escrever caracteres no outputStream com codificação UTF-8
         OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
-        CSVFormat cvsFormat = CSVFormat.Builder.create().
-                setHeader( "ID", "First Name", "Last Name", "Address", "Gender", "Enabled").
-                setSkipHeaderRecord(false).build();
-        try (CSVPrinter csvPrinter = new CSVPrinter(writer, cvsFormat
-        )) {
+
+        // Cria a configuração do formato CSV
+        CSVFormat cvsFormat = CSVFormat.Builder.create()
+                .setHeader("ID", "First Name", "Last Name", "Address", "Gender", "Enabled") // Define os nomes das colunas (cabeçalho)
+                .setSkipHeaderRecord(false) // Não pula o cabeçalho (ele será escrito no início do arquivo)
+                .build();
+
+        // Bloco try-with-resources para garantir que o CSVPrinter será fechado corretamente
+        try (CSVPrinter csvPrinter = new CSVPrinter(writer, cvsFormat)) {
+            // Para cada pessoa da lista, imprime uma linha no CSV com seus dados
             for (PersonDTO person : people) {
                 csvPrinter.printRecord(
-                        person.getId(), person.getFirstName(), person.getLastName(), person.getAddress(), person.getGender(), person.getEnabled()
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getAddress(),
+                        person.getGender(),
+                        person.getEnabled()
                 );
             }
         }
+
+        // Converte os dados escritos no outputStream para um array de bytes
+        // e retorna como um recurso (Resource) que pode ser enviado numa resposta HTTP
         return new ByteArrayResource(outputStream.toByteArray());
     }
 }
