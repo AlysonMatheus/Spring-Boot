@@ -35,9 +35,11 @@ public class PersonController implements PersonControllerDocs {
     private PersonServices service;
 
 
-    @GetMapping(value = "/exportPage", produces = {
-            MediaTypes.APPLICATION_CSV_VALUE,
-            MediaTypes.APPLICATION_XLSX_VALUE})
+
+    @GetMapping(produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_YAML_VALUE})
     @Override
     public ResponseEntity<PagedModel<EntityModel<PersonDTO>>> findAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -48,6 +50,9 @@ public class PersonController implements PersonControllerDocs {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "firstName"));
         return ResponseEntity.ok(service.findAll(pageable));
     }
+    @GetMapping(value = "/exportPage", produces = {
+            MediaTypes.APPLICATION_XLSX_VALUE,
+            MediaTypes.APPLICATION_CSV_VALUE})
 
     @Override
     public ResponseEntity<Resource> exportPage(
