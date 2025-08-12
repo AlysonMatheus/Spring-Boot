@@ -107,6 +107,11 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
         this.phoneNumber = phoneNumber;
     }
 
+    public  String getName(){
+        return (firstName != null ? firstName :"")+
+         (lastName != null ? "" + lastName :"");
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

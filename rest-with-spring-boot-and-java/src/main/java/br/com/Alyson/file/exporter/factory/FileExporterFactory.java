@@ -5,6 +5,7 @@ import br.com.Alyson.Exception.BadReuqestException;
 import br.com.Alyson.file.exporter.MediaTypes;
 import br.com.Alyson.file.exporter.contract.FileExporter;
 import br.com.Alyson.file.exporter.impl.CsvExporter;
+import br.com.Alyson.file.exporter.impl.PdfExporter;
 import br.com.Alyson.file.exporter.impl.XlsxExporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,10 @@ public class FileExporterFactory {
 //            return new XlsxImporter();
 
         } else if (acceptHeader.equalsIgnoreCase(MediaTypes.APPLICATION_CSV_VALUE)) {
-            return context.getBean(CsvExporter.class);
+            return context.getBean(CsvExporter.class); }
+
+        else if (acceptHeader.equalsIgnoreCase(MediaTypes.APPLICATION_PDF_VALUE)) {
+            return context.getBean(PdfExporter.class);
 
         } else {
             throw new BadReuqestException("Invalid File Format");
