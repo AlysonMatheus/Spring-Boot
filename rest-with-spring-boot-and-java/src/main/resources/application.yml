@@ -1,9 +1,9 @@
-
-
 cors:
-  originPatterns:  http://localhost:8081,http://localhost:3000,https://www.alyson.com.br
+  originPatterns: http://localhost:8081,http://localhost:3000,https://www.alyson.com.br
+
 file:
-   upload-dir: /Code/UploadDir
+  upload-dir: /Code/UploadDir
+
 spring:
   application:
     name: rest-with-spring-boot-and-java
@@ -21,6 +21,7 @@ spring:
       hibernate:
     show-sql: false
     open-in-view: false
+
   servlet:
     multipart:
       enabled: true
@@ -28,16 +29,18 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
 
-  logging:
-    level:
-       root: INFO
-     # root: WARN
-      # br.com.Alyson: DEBUG
 
-  spring-doc:
-     paths-to-match: /api/**/v1/**
-     swagger-ui:
-       use-root-path: true
+
+logging:
+  level:
+    root: INFO
+    # root: WARN
+    # br.com.Alyson: DEBUG
+
+spring-doc:
+  paths-to-match: /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
 
 server:
   port: 8081
