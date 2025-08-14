@@ -22,6 +22,7 @@
         <apache.poi.version>5.4.0</apache.poi.version>
         <commons-csv.version>1.12.0</commons-csv.version>
         <jasperreports.version>7.0.1</jasperreports.version>
+        <zxing.version>3.5.3</zxing.version>
     </properties>
     <dependencies>
         <dependency>
@@ -75,7 +76,16 @@
             <artifactId>jasperreports-pdf</artifactId>
             <version>${jasperreports.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
