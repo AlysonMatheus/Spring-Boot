@@ -25,7 +25,7 @@ public class PdfExporter implements FileExporter { // Implementa a interface Fil
 
         // Se não encontrar o arquivo, lança um erro
         if (inputStream == null ){
-            throw new RuntimeException("Template file nout found :/templates/people.jrxml");
+            throw new RuntimeException("Template file nout found: /templates/people.jrxml");
         }
 
         // Compila o arquivo .jrxml em um objeto JasperReport
@@ -50,5 +50,9 @@ public class PdfExporter implements FileExporter { // Implementa a interface Fil
             // Retorna o PDF como um ByteArrayResource para o Spring poder enviar como resposta HTTP
             return new ByteArrayResource(outputStream.toByteArray());
         }
+    }
+    @Override
+    public Resource exportPerson(PersonDTO person) throws Exception {
+        return null;
     }
 }

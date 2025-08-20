@@ -49,4 +49,9 @@ public class CsvExporter implements FileExporter { // Implementa a interface Fil
         // e retorna como um recurso (Resource) que pode ser enviado numa resposta HTTP
         return new ByteArrayResource(outputStream.toByteArray());
     }
+
+    @Override
+    public Resource exportPerson(PersonDTO person) throws Exception {
+        return null;
+    }
 }
