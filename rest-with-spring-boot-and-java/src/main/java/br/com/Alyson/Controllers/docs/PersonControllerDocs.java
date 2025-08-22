@@ -43,9 +43,9 @@ public interface PersonControllerDocs {
 
     )
     ResponseEntity<PagedModel<EntityModel<PersonDTO>>> findAll(
-            @RequestParam(value = "page", defaultValue = "0")Integer page,
-            @RequestParam(value = "size", defaultValue = "12")Integer size,
-            @RequestParam(value = "direction", defaultValue = "asc")String direction
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "12") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
     );
 
     @Operation(summary = "Exporting  People",
@@ -56,7 +56,7 @@ public interface PersonControllerDocs {
                             responseCode = "200",
                             content =
                                     {@Content(mediaType = MediaTypes.APPLICATION_XLSX_VALUE),
-                                    @Content(mediaType = MediaTypes.APPLICATION_XLSX_VALUE)
+                                            @Content(mediaType = MediaTypes.APPLICATION_XLSX_VALUE)
                                     }),
 
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
@@ -68,11 +68,12 @@ public interface PersonControllerDocs {
 
     )
     ResponseEntity<Resource> exportPage(
-            @RequestParam(value = "page", defaultValue = "0")Integer page,
-            @RequestParam(value = "size", defaultValue = "12")Integer size,
-            @RequestParam(value = "direction", defaultValue = "asc")String direction,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "12") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction,
             HttpServletRequest request
     );
+
     @Operation(summary = "Massive People Creation",
             description = "Massive People Creation with upload XLSX or CSV",
             tags = {"People"},
@@ -91,8 +92,9 @@ public interface PersonControllerDocs {
             }
 
     )
-   List<PersonDTO> massCreation(MultipartFile file);
-  @Operation(summary = "Find People by FirstName",
+    List<PersonDTO> massCreation(MultipartFile file);
+
+    @Operation(summary = "Find People by FirstName",
             description = "Find People by their Firsts Names",
             tags = {"People"},
             responses = {
@@ -113,9 +115,9 @@ public interface PersonControllerDocs {
     )
     ResponseEntity<PagedModel<EntityModel<PersonDTO>>> findByName(
             @PathVariable("'firstName") String firstName,
-            @RequestParam(value = "page", defaultValue = "0")Integer page,
-            @RequestParam(value = "size", defaultValue = "12")Integer size,
-            @RequestParam(value = "direction", defaultValue = "asc")String direction
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "12") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
     );
 
 
@@ -138,15 +140,35 @@ public interface PersonControllerDocs {
     )
     PersonDTO findById(@PathVariable("id") Long id);
 
-
-    @Operation(summary = "Create Person",
-            description = "Find a specific create",
+    @Operation(summary = "Finds a Person",
+            description = "Find a specific person by your ID",
             tags = {"People"},
             responses = {
                     @ApiResponse(description = "Success",
                             responseCode = "200",
                             content = @Content(schema = @Schema(implementation = PersonDTO.class))
                     ),
+
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bau Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "504", content = @Content)
+            }
+
+    )
+    ResponseEntity<Resource> export(@PathVariable("id") Long id,
+                                    HttpServletRequest request);
+
+
+    @Operation(summary = "Exporting Person data as PDF",
+            description = "Exporting a specific Person data as PDF by your ID",
+            tags = {"People"},
+            responses = {
+                    @ApiResponse(description = "Success",
+                            responseCode = "200",
+                            content =
+                                    @Content(mediaType = MediaTypes.APPLICATION_PDF_VALUE)),
 
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bau Request", responseCode = "400", content = @Content),
@@ -180,6 +202,7 @@ public interface PersonControllerDocs {
 
     )
     PersonDTO update(@RequestBody PersonDTO person);
+
     @Operation(summary = "Disable a Person",
             description = "Disable a specific person by your ID",
             tags = {"People"},

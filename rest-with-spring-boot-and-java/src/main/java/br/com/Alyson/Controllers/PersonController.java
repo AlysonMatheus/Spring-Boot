@@ -119,6 +119,11 @@ public class PersonController implements PersonControllerDocs {
     }
 
     @Override
+    public ResponseEntity<Resource> export(Long id, HttpServletRequest request) {
+        return null;
+    }
+
+    @Override
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
