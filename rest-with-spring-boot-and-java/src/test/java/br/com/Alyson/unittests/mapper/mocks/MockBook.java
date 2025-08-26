@@ -40,8 +40,8 @@ public class MockBook {
         Book book = new Book();
         book.setId(number.longValue());
         book.setAuthor("Some Author" + number);
-        book.setLaunch_date(new Date());
-        book.setPrice(25F);
+        book.setLaunchDate(new Date());
+        book.setPrice(Double.valueOf(25));
         book.setTitle("Some Title" + number);
         return book;
     }
@@ -51,7 +51,7 @@ public class MockBook {
         book.setId(number.longValue());
         book.setAuthor("Some Author" + number);
         book.setLaunch_date(new Date());
-        book.setPrice(25F);
+        book.setPrice(Double.valueOf(25));
         book.setTitle("Some Title" + number);
         return book;
     }

@@ -38,8 +38,8 @@ public class Person implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)//listar os livros quando carregar a pessoa
     @JoinTable(
            name = "person_books",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns =  @JoinColumn(name = "person_id")
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns =  @JoinColumn(name = "book_id")
     )
     private List<Book> books;
 

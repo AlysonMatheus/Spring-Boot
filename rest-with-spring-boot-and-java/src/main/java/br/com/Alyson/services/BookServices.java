@@ -7,7 +7,6 @@ import br.com.Alyson.Exception.ResourceNotFoundException;
 import br.com.Alyson.Repository.BookRepository;
 import br.com.Alyson.data.dto.books.BookDTO;
 
-import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.mapper.custom.BookMapper;
 import br.com.Alyson.model.Book;
 
@@ -24,7 +23,6 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
 
-import static br.com.Alyson.mapper.ObjectMapper.parseListObject;
 import static br.com.Alyson.mapper.ObjectMapper.parseObject;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -87,7 +85,7 @@ public class BookServices {
 
         entity.setId(book.getId());
         entity.setAuthor(book.getAuthor());
-        entity.setLaunch_date((book.getLaunch_date()));
+        entity.setLaunchDate((book.getLaunch_date()));
         entity.setTitle(book.getTitle());
         entity.setPrice(book.getPrice());
 

@@ -21,7 +21,7 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
 
     private Date launch_date;
 
-    private float price;
+    private Double price;
 
     private String title;
 
@@ -53,11 +53,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
         this.launch_date = launch_date;
     }
 
-    public float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -75,7 +75,7 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         BookDTO bookDTO = (BookDTO) o;
-        return Float.compare(getPrice(), bookDTO.getPrice()) == 0 && Objects.equals(getId(), bookDTO.getId()) && Objects.equals(getAuthor(), bookDTO.getAuthor()) && Objects.equals(getLaunch_date(), bookDTO.getLaunch_date()) && Objects.equals(getTitle(), bookDTO.getTitle());
+        return Objects.equals(getId(), bookDTO.getId()) && Objects.equals(getAuthor(), bookDTO.getAuthor()) && Objects.equals(getLaunch_date(), bookDTO.getLaunch_date()) && Objects.equals(getPrice(), bookDTO.getPrice()) && Objects.equals(getTitle(), bookDTO.getTitle());
     }
 
     @Override

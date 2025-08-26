@@ -133,7 +133,7 @@ class BookServicesTest {
         assertEquals("Some Author1", persisted.getAuthor());
         assertEquals(25F,persisted.getPrice());
         assertEquals("Some Title1",persisted.getTitle());
-        assertNotNull(persisted.getLaunch_date());
+        assertNotNull(persisted.getLaunchDate());
 
 
     }
@@ -200,7 +200,7 @@ class BookServicesTest {
         assertEquals("Some Author1", persisted.getAuthor());
         assertEquals(25F,persisted.getPrice());
         assertEquals("Some Title1",persisted.getTitle());
-        assertNotNull(persisted.getLaunch_date());
+        assertNotNull(persisted.getLaunchDate());
 
 
     }
