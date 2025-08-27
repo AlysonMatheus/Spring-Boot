@@ -3,7 +3,7 @@ package br.com.Alyson.file.exporter.factory;
 
 import br.com.Alyson.Exception.BadReuqestException;
 import br.com.Alyson.file.exporter.MediaTypes;
-import br.com.Alyson.file.exporter.contract.FileExporter;
+import br.com.Alyson.file.exporter.contract.PersonExporter;
 import br.com.Alyson.file.exporter.impl.CsvExporter;
 import br.com.Alyson.file.exporter.impl.PdfExporter;
 import br.com.Alyson.file.exporter.impl.XlsxExporter;
@@ -20,7 +20,7 @@ public class FileExporterFactory {
     @Autowired
     private ApplicationContext context;
 
-    public FileExporter getExporter(String acceptHeader) throws Exception{
+    public PersonExporter getExporter(String acceptHeader) throws Exception{
         if (acceptHeader.equalsIgnoreCase(MediaTypes.APPLICATION_XLSX_VALUE)){
             return context.getBean(XlsxExporter.class);
 //            return new XlsxImporter();

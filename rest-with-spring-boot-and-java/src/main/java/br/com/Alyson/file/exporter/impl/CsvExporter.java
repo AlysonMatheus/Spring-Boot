@@ -1,7 +1,7 @@
 package br.com.Alyson.file.exporter.impl;
 
 import br.com.Alyson.data.dto.v1.PersonDTO;
-import br.com.Alyson.file.exporter.contract.FileExporter;
+import br.com.Alyson.file.exporter.contract.PersonExporter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.springframework.core.io.ByteArrayResource;
@@ -14,10 +14,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Component // Torna essa classe um componente do Spring (pode ser injetado com @Autowired)
-public class CsvExporter implements FileExporter { // Implementa a interface FileExporter
+public class CsvExporter implements PersonExporter { // Implementa a interface FileExporter
 
     @Override
-    public Resource exportFile(List<PersonDTO> people) throws Exception {
+    public Resource exportPeople(List<PersonDTO> people) throws Exception {
         // Cria um stream de saída em memória (em vez de salvar em arquivo físico)
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 

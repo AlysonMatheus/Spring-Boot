@@ -1,7 +1,7 @@
 package br.com.Alyson.file.exporter.impl;
 
 import br.com.Alyson.data.dto.v1.PersonDTO;
-import br.com.Alyson.file.exporter.contract.FileExporter;
+import br.com.Alyson.file.exporter.contract.PersonExporter;
 import br.com.Alyson.services.QRCodeService;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -25,13 +25,13 @@ import java.util.List;
 import java.util.Map;
 
 @Component // Indica que essa classe é um componente gerenciado pelo Spring (Bean)
-public class PdfExporter implements FileExporter { // Implementa a interface FileExporter
+public class PdfExporter implements PersonExporter { // Implementa a interface FileExporter
 
     @Autowired
     private QRCodeService service;
 
     @Override
-    public Resource exportFile(List<PersonDTO> people) throws Exception {
+    public Resource exportPeople(List<PersonDTO> people) throws Exception {
         // Método que gera um PDF a partir de uma lista de PersonDTO e retorna como Resource
 
         // Carrega o arquivo de template .jrxml do classpath

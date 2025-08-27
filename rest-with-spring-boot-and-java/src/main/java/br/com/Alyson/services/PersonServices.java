@@ -12,8 +12,7 @@ import br.com.Alyson.data.dto.v1.PersonDTO;
 import static br.com.Alyson.mapper.ObjectMapper.parseObject;
 
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
-import br.com.Alyson.file.exporter.MediaTypes;
-import br.com.Alyson.file.exporter.contract.FileExporter;
+import br.com.Alyson.file.exporter.contract.PersonExporter;
 import br.com.Alyson.file.exporter.factory.FileExporterFactory;
 import br.com.Alyson.file.importer.contract.FileImporter;
 import br.com.Alyson.file.importer.factory.FileImporterFactory;
@@ -96,7 +95,7 @@ public class PersonServices {
 
 
         try {
-            FileExporter exporter = this.exporter.getExporter(acceptHeader);
+            PersonExporter exporter = this.exporter.getExporter(acceptHeader);
             return exporter.exportPerson(person);
         } catch (Exception e) {
             throw new RuntimeException("Error during file export!", e);
@@ -116,10 +115,10 @@ public class PersonServices {
 
         try {
             // Obtém o exportador de arquivos apropriado com base no tipo de mídia solicitado (CSV, Excel, etc.)
-            FileExporter exporter = this.exporter.getExporter(acceptHeader);
+            PersonExporter exporter = this.exporter.getExporter(acceptHeader);
 
             // Exporta a lista de pessoas e retorna o arquivo como um recurso (Resource)
-            return exporter.exportFile(people);
+            return exporter.exportPeople(people);
 
         } catch (Exception e) {
             // Em caso de erro durante a exportação, lança uma exceção com mensagem personalizada
