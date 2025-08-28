@@ -176,8 +176,8 @@ class BookControllerXmlTest extends AbstractIntegrationTest {
         assertNotNull(bookOne.getAuthor());
         assertNotNull(bookOne.getPrice());
         assertTrue(bookOne.getId() > 0);
-        assertEquals("Big Data: como extrair volume, variedade, velocidade e valor da avalanche de informação cotidiana", bookOne.getTitle());
-        assertEquals("Viktor Mayer-Schonberger e Kenneth Kukier", bookOne.getAuthor());
+        assertEquals("Implantando a governança de TI", bookOne.getTitle());
+        assertEquals("Aguinaldo Aragon Fernandes e Vladimir Ferraz de Abreu", bookOne.getAuthor());
         assertEquals(54.00, bookOne.getPrice());
 
         BookDTO foundBookFive = books.get(4);
@@ -187,9 +187,9 @@ class BookControllerXmlTest extends AbstractIntegrationTest {
         assertNotNull(foundBookFive.getAuthor());
         assertNotNull(foundBookFive.getPrice());
         assertTrue(foundBookFive.getId() > 0);
-        assertEquals("Domain Driven Design", foundBookFive.getTitle());
-        assertEquals("Eric Evans", foundBookFive.getAuthor());
-        assertEquals(92.00, foundBookFive.getPrice());
+        assertEquals("The Pragmatic Programmer", foundBookFive.getTitle());
+        assertEquals("Andrew Hunt e David Thomas", foundBookFive.getAuthor());
+        assertEquals(94.82, foundBookFive.getPrice());
     }
 
     private void mockBook() {
