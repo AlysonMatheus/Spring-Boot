@@ -14,6 +14,15 @@ spring:
       hibernate:
     show-sql: false
     open-in-view: false
+  mail:
+    host: smt.gmail.com
+    port: 587
+    username: ${EMAIl_USERNAME}
+    password: :${EMAIL_PASSWORD}
+    properties:
+      mail.smtp: true
+      mail.smtp.starttls.enabled: true
+      mail.smtp.starttls.required: true
     servlet:
       multipart:
         enabled: true
@@ -37,3 +46,6 @@ cors:
   originPatterns:  http://localhost:8081,http://localhost:3000,https://www.alyson.com.br
 file:
   upload-dir: /Code/UploadDir
+email:
+  subject: "Default Subject"
+  message: "Default Message"
