@@ -2,8 +2,7 @@ package br.com.Alyson.Controllers;
 
 import br.com.Alyson.Controllers.docs.BookControllersDocs;
 import br.com.Alyson.data.dto.books.BookDTO;
-
-
+import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.services.BookServices;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/book/v1")
 @Tag(name = "Book", description = "Endpoints for Managing Book")
 public class BookController implements BookControllersDocs {
 
-@Autowired
- private BookServices services;
+    @Autowired
+    private BookServices services;
 
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
@@ -32,16 +29,15 @@ public class BookController implements BookControllersDocs {
             MediaType.APPLICATION_YAML_VALUE})
     @Override
     public ResponseEntity<PagedModel<EntityModel<BookDTO>>> findAll(
-            @RequestParam(value = "page", defaultValue = "0")Integer page,
-            @RequestParam(value = "size", defaultValue = "12")Integer size,
-            @RequestParam(value = "direction", defaultValue = "asc")String direction
-    ){
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "12") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
+    ) {
         var sortDirection = "desc".equalsIgnoreCase(direction) ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Pageable pageable = PageRequest.of(page,size, Sort.by(sortDirection,"author"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "author"));
         return ResponseEntity.ok(services.findAll(pageable));
 
     }
-
 
 
     @Override
@@ -75,8 +71,6 @@ public class BookController implements BookControllersDocs {
     }
 
 
-
-
     @Override
     @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_JSON_VALUE,
@@ -101,5 +95,6 @@ public class BookController implements BookControllersDocs {
         services.delete(id);
         return ResponseEntity.noContent().build();
     }
+  
 
 }

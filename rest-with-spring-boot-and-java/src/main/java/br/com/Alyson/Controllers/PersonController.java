@@ -5,8 +5,6 @@ import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
 import br.com.Alyson.file.exporter.MediaTypes;
 import br.com.Alyson.services.PersonServices;
-
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,6 @@ public class PersonController implements PersonControllerDocs {
     private PersonServices service;
 
 
-
     @GetMapping(produces = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
@@ -51,6 +48,7 @@ public class PersonController implements PersonControllerDocs {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "firstName"));
         return ResponseEntity.ok(service.findAll(pageable));
     }
+
     @GetMapping(value = "/exportPage", produces = {
             MediaTypes.APPLICATION_XLSX_VALUE,
             MediaTypes.APPLICATION_CSV_VALUE,
@@ -71,12 +69,12 @@ public class PersonController implements PersonControllerDocs {
 
         Resource file = service.exportPage(pageable, acceptHeader);
         Map<String, String> exetensioMap = Map.of(
-                MediaTypes.APPLICATION_XLSX_VALUE,".xlsx",
-                MediaTypes.APPLICATION_CSV_VALUE,".csv",
-                MediaTypes.APPLICATION_PDF_VALUE,".pdf"
+                MediaTypes.APPLICATION_XLSX_VALUE, ".xlsx",
+                MediaTypes.APPLICATION_CSV_VALUE, ".csv",
+                MediaTypes.APPLICATION_PDF_VALUE, ".pdf"
         );
 
-        var fileExtension = exetensioMap.getOrDefault(acceptHeader,"");
+        var fileExtension = exetensioMap.getOrDefault(acceptHeader, "");
         var contentType = acceptHeader != null ? acceptHeader : "application/octet - stream";
 
         var fileName = "people_exported" + fileExtension;
@@ -117,13 +115,14 @@ public class PersonController implements PersonControllerDocs {
         return person;
 
     }
+
     @GetMapping(value = "/export/{id}",
             produces = {
-            MediaType.APPLICATION_PDF_VALUE}
+                    MediaType.APPLICATION_PDF_VALUE}
     )
 
     @Override
-    public ResponseEntity<Resource> export(@PathVariable("id")Long id, HttpServletRequest request) {
+    public ResponseEntity<Resource> export(@PathVariable("id") Long id, HttpServletRequest request) {
         String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
 
 
