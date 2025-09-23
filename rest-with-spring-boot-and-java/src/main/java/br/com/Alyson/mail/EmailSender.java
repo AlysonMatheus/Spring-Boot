@@ -43,8 +43,9 @@ public class EmailSender implements Serializable {
         return this;
     }
 
-    public void withMessage(String body) {
+    public EmailSender withMessage(String body) {
         this.body = body;
+        return  this;
     }
 
 
