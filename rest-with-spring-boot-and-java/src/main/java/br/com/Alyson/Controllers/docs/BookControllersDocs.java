@@ -1,9 +1,6 @@
 package br.com.Alyson.Controllers.docs;
 
 import br.com.Alyson.data.dto.books.BookDTO;
-
-
-import br.com.Alyson.data.dto.v1.PersonDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 public interface BookControllersDocs {
     @Operation(summary = "Find All Books",
@@ -39,12 +34,11 @@ public interface BookControllersDocs {
             }
 
     )
-    ResponseEntity<PagedModel<EntityModel<BookDTO>>>findAll(
-            @RequestParam(value = "page", defaultValue = "0")Integer page,
-            @RequestParam(value = "size", defaultValue = "12")Integer size,
-            @RequestParam(value = "direction", defaultValue = "asc")String direction
+    ResponseEntity<PagedModel<EntityModel<BookDTO>>> findAll(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "12") Integer size,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
     );
-
 
 
     @Operation(summary = "Finds a Books",
@@ -85,9 +79,6 @@ public interface BookControllersDocs {
 
     )
     BookDTO create(@RequestBody BookDTO bookDTO);
-
-
-
 
 
     @Operation(summary = "Finds a Books Update",
