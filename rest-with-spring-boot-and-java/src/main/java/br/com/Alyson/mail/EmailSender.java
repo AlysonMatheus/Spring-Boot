@@ -7,7 +7,6 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mail.MailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -54,7 +53,7 @@ public class EmailSender implements Serializable { // Permite serialização do 
     }
 
     // Adiciona um arquivo em anexo ao e-mail
-    public EmailSender Attach(String fileDir) {
+    public EmailSender attach(String fileDir) {
         this.attachment = new File(fileDir); // Cria o objeto File a partir do caminho recebido
         return this;
     }
