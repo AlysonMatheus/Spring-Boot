@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements UserDetailsService {
-   @Autowired
+    @Autowired
     UserRepository repository;
 
     public UserService(UserRepository repository) {
@@ -18,6 +18,9 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        var user = repository.findByUserName(username);
+        if (user != null) return user;
+
+        else throw new UsernameNotFoundException("User name " + username + " not found");
     }
 }
