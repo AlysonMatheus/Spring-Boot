@@ -71,16 +71,14 @@ public class JwtTokenProvider {
     private String getRefreshToken(String username, List<String> roles, Date now) {
 
 
-        Date refreshTokenValidity = new Date(now.getTime() + validityInMilliseconds);
+        Date refreshTokenValidity = new Date(now.getTime() + (validityInMilliseconds * 3));
 
         return JWT.create()
                 .withClaim("roles", roles)
                 .withIssuedAt(now)
                 .withExpiresAt(refreshTokenValidity)
                 .withSubject(username)
-
-                .sign(algorithm)
-                .toString();
+                .sign(algorithm);
     }
 
     // Método responsável por gerar o Access Token (JWT)
@@ -93,8 +91,7 @@ public class JwtTokenProvider {
                 .withExpiresAt(validity)
                 .withSubject(username)
                 .withIssuer(issuerUrl)
-                .sign(algorithm)
-                .toString();
+                .sign(algorithm);
     }
 
     public Authentication getAuthentication(String token) {
@@ -105,27 +102,27 @@ public class JwtTokenProvider {
     }
 
     private DecodedJWT decodedToken(String token) {
-        Algorithm alg =Algorithm.HMAC256(secretKey.getBytes());
-        JWTVerifier verifier =JWT.require(alg).build();
+        Algorithm alg = Algorithm.HMAC256(secretKey.getBytes());
+        JWTVerifier verifier = JWT.require(alg).build();
         DecodedJWT decodedJWT = verifier.verify(token);
         return decodedJWT;
     }
 
-    public  String resolveToken(HttpServletRequest request){
+    public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
 
         if (StringUtils.isEmpty(bearerToken) && bearerToken.startsWith("Bearer")) {
-        return bearerToken.substring("Bearer".length());
-        }
-            else {
+            return bearerToken.substring("Bearer".length());
+        } else {
             throw new InvalidJwtAuthenticationException("Invalid JWT Token");
         }
 
     }
-    public boolean validateToken(String token){
+
+    public boolean validateToken(String token) {
         DecodedJWT decodedJWT = decodedToken(token);
         try {
-            if (decodedJWT.getExpiresAt().before(new Date())){
+            if (decodedJWT.getExpiresAt().before(new Date())) {
                 return false;
             }
             return true;
