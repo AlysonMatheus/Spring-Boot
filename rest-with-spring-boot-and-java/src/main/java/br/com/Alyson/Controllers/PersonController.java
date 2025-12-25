@@ -4,7 +4,7 @@ import br.com.Alyson.Controllers.docs.PersonControllerDocs;
 import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.data.dto.v2.PersonDTOV2;
 import br.com.Alyson.file.exporter.MediaTypes;
-import br.com.Alyson.services.PersonServices;
+import br.com.Alyson.services.PersonService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import java.util.Map;
 public class PersonController implements PersonControllerDocs {
 
     @Autowired
-    private PersonServices service;
+    private PersonService service;
 
 
     @GetMapping(produces = {

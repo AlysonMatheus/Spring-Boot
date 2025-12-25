@@ -4,7 +4,7 @@ import br.com.Alyson.Exception.RequiredObjectIsNullException;
 import br.com.Alyson.Repository.PersonRepository;
 import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.model.Person;
-import br.com.Alyson.services.PersonServices;
+import br.com.Alyson.services.PersonService;
 import br.com.Alyson.unittests.mapper.mocks.MockPerson;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ class PersonServicesTest {
 
     MockPerson input;
     @InjectMocks
-    private PersonServices service;
+    private PersonService service;
     @Mock
     PersonRepository repository;
 

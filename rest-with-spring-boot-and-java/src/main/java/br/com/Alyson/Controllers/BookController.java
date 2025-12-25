@@ -2,8 +2,7 @@ package br.com.Alyson.Controllers;
 
 import br.com.Alyson.Controllers.docs.BookControllersDocs;
 import br.com.Alyson.data.dto.books.BookDTO;
-import br.com.Alyson.data.dto.v1.PersonDTO;
-import br.com.Alyson.services.BookServices;
+import br.com.Alyson.services.BookService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookController implements BookControllersDocs {
 
     @Autowired
-    private BookServices services;
+    private BookService services;
 
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
