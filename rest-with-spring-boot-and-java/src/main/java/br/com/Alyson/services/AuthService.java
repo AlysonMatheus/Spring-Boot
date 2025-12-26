@@ -31,6 +31,7 @@ public class AuthService {
                 )
         );
 
+
         var user = repository.findByUserName(credentials.getUsername());
         if (user == null) {
             throw new UsernameNotFoundException("Username " + credentials.getUsername() + " not found");

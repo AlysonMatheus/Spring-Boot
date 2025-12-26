@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
-import java.security.Security;
+
 
 public class JwtTokenFilter extends GenericFilterBean {
     @Autowired
