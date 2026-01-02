@@ -100,7 +100,7 @@ public class User implements UserDetails, Serializable {
     }
 
     public void setUserName(String username) {
-        this.userName = userName;
+        this.userName = username;
     }
 
     public String getFullName() {

@@ -94,7 +94,8 @@ public class JwtTokenProvider {
                 .withIssuedAt(now)
                 .withExpiresAt(refreshTokenValidity)
                 .withSubject(username)
-                .sign(algorithm);
+                .sign(algorithm)
+                .strip();
     }
 
     // Método responsável por gerar o Access Token (JWT)
@@ -107,7 +108,8 @@ public class JwtTokenProvider {
                 .withExpiresAt(validity)
                 .withSubject(username)
                 .withIssuer(issuerUrl)
-                .sign(algorithm);
+                .sign(algorithm)
+                .strip();
     }
 
     public Authentication getAuthentication(String token) {
