@@ -1,6 +1,7 @@
 package br.com.Alyson.Controllers;
 
 
+import br.com.Alyson.Controllers.docs.AuthControllerDocs;
 import br.com.Alyson.data.dto.security.AccountCredentialsDTO;
 import br.com.Alyson.data.dto.v1.PersonDTO;
 import br.com.Alyson.services.AuthService;
@@ -18,11 +19,12 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Authentication endpoints")
 @RestController
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController implements AuthControllerDocs {
     @Autowired
     AuthService service;
 
-    @Operation(summary = "Authenticates an user and returns a token")
+    @Override
+
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody AccountCredentialsDTO credentials) {
         if (credentialsIsInvalid(credentials))
@@ -33,7 +35,8 @@ public class AuthController {
         return ResponseEntity.ok().body(token);
     }
 
-    @Operation(summary = " Refresh token for authenticated user and returns a token")
+    @Override
+
     @PutMapping("/refresh/{username}")
     public ResponseEntity<?> refreshToken(@PathVariable("username") String username,
                                           @RequestHeader("Authorization") String refreshToken) {
@@ -45,6 +48,7 @@ public class AuthController {
         return ResponseEntity.ok().body(token);
     }
 
+    @Override
     @PostMapping(value = "/createUser",
             consumes = {MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_JSON_VALUE,
