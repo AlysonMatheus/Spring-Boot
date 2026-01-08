@@ -16,7 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Authentication endpoints")
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController implements AuthControllerDocs {
@@ -32,7 +32,7 @@ public class AuthController implements AuthControllerDocs {
 
         var token = service.singIn(credentials);
         if (token == null) ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
-        return ResponseEntity.ok().body(token);
+        return token;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AuthController implements AuthControllerDocs {
 
         var token = service.refreshToken(username, refreshToken);
         if (token == null) ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
-        return ResponseEntity.ok().body(token);
+        return token;
     }
 
     @Override
