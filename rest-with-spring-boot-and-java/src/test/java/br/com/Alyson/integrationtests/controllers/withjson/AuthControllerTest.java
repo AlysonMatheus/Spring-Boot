@@ -51,5 +51,20 @@ class AuthControllerTest extends AbstractIntegrationTest {
 
     @Test
     void refreshToken() {
+        tokenDto  = given()
+                .basePath("/auth/refresh")
+                .port(TestConfigs.SERVER_PORT)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .pathParam("username",tokenDto.getUsername())
+                .header(TestConfigs.HEADER_PARAM_AUTHORIZATION,"Bearer "+ tokenDto.getRefreshToken())
+                .when()
+                .put("{username}")
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .as(TokenDTO.class);
+        assertNotNull(tokenDto.getAccessToken());
+        assertNotNull(tokenDto.getRefreshToken());
     }
-}
+    }
