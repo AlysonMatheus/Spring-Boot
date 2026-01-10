@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AuthControllerTest extends AbstractIntegrationTest {
+class AuthControllerJsonTest extends AbstractIntegrationTest {
 
 
     private static TokenDTO tokenDto;
